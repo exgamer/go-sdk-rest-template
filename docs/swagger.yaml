@@ -1,0 +1,43 @@
+basePath: /
+definitions:
+  postRepoStructures.Post:
+    properties:
+      description:
+        type: string
+      id:
+        type: integer
+      title:
+        type: string
+    type: object
+  postResponses.PostResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/postRepoStructures.Post'
+        type: array
+      success:
+        type: boolean
+    type: object
+host: localhost:8090
+info:
+  contact: {}
+  description: Example Service Go API
+  title: Example Service Go API
+  version: "1.0"
+paths:
+  /example-go/v1/posts:
+    get:
+      consumes:
+      - application/json
+      description: Posts
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/postResponses.PostResponse'
+      summary: Posts
+      tags:
+      - gifts
+swagger: "2.0"

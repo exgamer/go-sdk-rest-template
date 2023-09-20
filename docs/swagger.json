@@ -1,0 +1,66 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Example Service Go API",
+        "title": "Example Service Go API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:8090",
+    "basePath": "/",
+    "paths": {
+        "/example-go/v1/posts": {
+            "get": {
+                "description": "Posts",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "gifts"
+                ],
+                "summary": "Posts",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/postResponses.PostResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "postRepoStructures.Post": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "postResponses.PostResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/postRepoStructures.Post"
+                    }
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        }
+    }
+}
