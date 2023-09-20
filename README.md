@@ -1,5 +1,4 @@
-REST Application Example with using 
-https://github.com/exgamer/go-rest-sdk
+REST Application Example with using https://github.com/exgamer/go-rest-sdk
 
 1 create table test_table.sql
 
