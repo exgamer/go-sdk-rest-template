@@ -46,6 +46,7 @@ func SetRoutes(
 	v1 := router.Group("/example-go/v1")
 	{
 		v1.Use(middleware.ResponseHandler)
+		v1.Use(middleware.PinbaHandler(appConfig))
 		v1.GET("/test", controllersFactory.PostController.All())
 	}
 }
