@@ -4,7 +4,7 @@ services:
   golang:
     build:
       context: go
-      dockerfile: Dockerfile
+      dockerfile: go/Dockerfile
     container_name: golang
     restart: always
     tty: true
