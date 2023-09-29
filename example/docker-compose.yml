@@ -12,3 +12,12 @@ services:
       - 8090:8090
     volumes:
       - /{PATH_TO_YOUR_PROJECTS}:/go/tmp/src
+  go-rest-service:
+      build:
+        context: go-rest-service
+        dockerfile: Dockerfile
+      container_name: go-rest-service
+      restart: always
+      tty: true
+      ports:
+        - 8091:8091
