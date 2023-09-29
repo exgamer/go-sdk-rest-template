@@ -1,14 +1,14 @@
 REST Application Example with using https://github.com/exgamer/go-rest-sdk
 
-1 [set up environment](manual/ENVIRONMENT.MD)
+1 [Set up environment](manual/ENVIRONMENT.MD)
 
-2 create table example/test_table.sql
+2 Create table example/test_table.sql
 
-3 create .env file from .env.example
+3 Create .env file from .env.example
 
 4 go mod tidy
 
-5 install swagger: go install github.com/swaggo/swag/cmd/swag@latest
+5 Install swagger: go install github.com/swaggo/swag/cmd/swag@latest
 
 6 Generate swagger docs: swag init
 
@@ -24,4 +24,5 @@ REST Application Example with using https://github.com/exgamer/go-rest-sdk
 
 12 Swagger docs curl --location 'http://localhost:8090/swagger/index.html'
 
+13 [Create docker image for your rest application](manual/HOW_TO_CREATE_DOCKER_FOR_GO_SERVICE.MD)
 
