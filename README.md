@@ -1,6 +1,6 @@
 REST Application Example with using https://github.com/exgamer/go-rest-sdk
 
-1 [set up environment](manual/ENVIRONMENT.md)
+1 [set up environment](manual/ENVIRONMENT.MD)
 
 2 create table example/test_table.sql
 
