@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  golang:
+    build:
+      context: go
+      dockerfile: Dockerfile
+    container_name: golang
+    restart: always
+    tty: true
+    ports:
+      - 8090:8090
+    volumes:
+      - /{PATH_TO_YOUR_PROJECTS}:/go/tmp/src

@@ -1,25 +1,27 @@
 REST Application Example with using https://github.com/exgamer/go-rest-sdk
 
-1 create table test_table.sql
+1 [set up environment](manual/ENVIRONMENT.md)
 
-2 create .env file from .env.example
+2 create table example/test_table.sql
 
-3 go mod tidy
+3 create .env file from .env.example
 
-4 install swagger: go install github.com/swaggo/swag/cmd/swag@latest
+4 go mod tidy
 
-5 Generate swagger docs: swag init
+5 install swagger: go install github.com/swaggo/swag/cmd/swag@latest
 
-4 go run main.go
+6 Generate swagger docs: swag init
 
-5 Test endpoint: curl --location 'http://0.0.0.0:8090/example-go/v1/test'
+7 go run main.go
 
-6 Metrics endpoint: curl --location 'http://0.0.0.0:8090/metrics'
+8 Test endpoint: curl --location 'http://0.0.0.0:8090/example-go/v1/test'
 
-7 Healthcheck readiness endpoint: curl --location 'http://0.0.0.0:8090/healthcheck/readiness'
+9 Metrics endpoint: curl --location 'http://0.0.0.0:8090/metrics'
 
-8 Healthcheck liveness endpoint: curl --location 'http://0.0.0.0:8090/healthcheck/liveness'
+10 Healthcheck readiness endpoint: curl --location 'http://0.0.0.0:8090/healthcheck/readiness'
 
-9 Swagger docs curl --location 'http://localhost:8090/swagger/index.html'
+11 Healthcheck liveness endpoint: curl --location 'http://0.0.0.0:8090/healthcheck/liveness'
+
+12 Swagger docs curl --location 'http://localhost:8090/swagger/index.html'
 
 
