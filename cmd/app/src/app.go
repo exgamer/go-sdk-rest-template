@@ -6,7 +6,6 @@ import (
 	"exgamer.kz/example-service/cmd/app/src/routes"
 	structures2 "github.com/exgamer/go-rest-sdk/pkg/config/structures"
 	helpers "github.com/exgamer/go-rest-sdk/pkg/helpers/db/mysql"
-	"github.com/exgamer/go-rest-sdk/pkg/helpers/db/redis"
 	ginhelper "github.com/exgamer/go-rest-sdk/pkg/helpers/gin"
 	"github.com/gin-gonic/gin"
 	redis2 "github.com/redis/go-redis/v9"
@@ -16,19 +15,16 @@ import (
 func NewApp(
 	appConfig *structures2.AppConfig,
 	dbConfig *structures2.DbConfig,
-	redisConfig *structures2.RedisConfig,
 ) *App {
 	return &App{
-		appConfig:   appConfig,
-		dbConfig:    dbConfig,
-		redisConfig: redisConfig,
+		appConfig: appConfig,
+		dbConfig:  dbConfig,
 	}
 }
 
 type App struct {
 	appConfig             *structures2.AppConfig
 	dbConfig              *structures2.DbConfig
-	redisConfig           *structures2.RedisConfig
 	db                    *sql.DB
 	mysqlRepoFactory      *factories.MysqlRepositoryFactory
 	entityManagersFactory *factories.EntityManagersFactory
@@ -41,9 +37,6 @@ type App struct {
 func (app *App) Run() {
 	app.OpenDbConnection()
 	defer app.CloseDbConnection()
-
-	app.OpenRedisConnection()
-	defer app.CloseRedisConnection()
 
 	app.router = ginhelper.InitRouter(app.appConfig)
 
@@ -71,15 +64,4 @@ func (app *App) OpenDbConnection() error {
 
 func (app *App) CloseDbConnection() {
 	helpers.CloseMysqlConnection(app.db)
-}
-
-func (app *App) OpenRedisConnection() {
-	// Open up database connection.
-	client := redis.OpenRedisConnection(app.redisConfig)
-
-	app.redisClient = client
-}
-
-func (app *App) CloseRedisConnection() {
-	redis.CloseRedisConnection(app.redisClient)
 }

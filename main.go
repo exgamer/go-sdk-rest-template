@@ -15,13 +15,13 @@ import (
 //	@BasePath	/
 func main() {
 	// Configuration
-	appConfig, dbConfig, redisConfig, err := config.InitConfig()
+	appConfig, dbConfig, err := config.InitConfig()
 
 	if err != nil {
 		log.Fatalf("Config error: %s", err)
 	}
 
 	// Run
-	app := src.NewApp(appConfig, dbConfig, redisConfig)
+	app := src.NewApp(appConfig, dbConfig)
 	app.Run()
 }

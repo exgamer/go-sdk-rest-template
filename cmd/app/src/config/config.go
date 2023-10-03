@@ -7,8 +7,8 @@ import (
 	"log"
 )
 
-func InitConfig() (*structures2.AppConfig, *structures2.DbConfig, *structures2.RedisConfig, error) {
-	appConfig, dbConfig, redisConfig, err := config.InitBaseConfig()
+func InitConfig() (*structures2.AppConfig, *structures2.DbConfig, error) {
+	appConfig, dbConfig, err := config.InitBaseConfig()
 
 	if err != nil {
 		log.Fatalf("Some error occurred. Err: %s", err)
@@ -19,5 +19,5 @@ func InitConfig() (*structures2.AppConfig, *structures2.DbConfig, *structures2.R
 		spew.Dump(dbConfig)
 	}
 
-	return appConfig, dbConfig, redisConfig, nil
+	return appConfig, dbConfig, nil
 }
