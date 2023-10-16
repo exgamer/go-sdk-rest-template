@@ -19,7 +19,7 @@ func SetRoutes(
 	appConfig *structures2.AppConfig,
 	controllersFactory *factories.ControllersFactory,
 ) {
-	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	router.GET("/example-service/api-docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	// healthcheck
 	healthcheck := router.Group("/healthcheck")
 	{
