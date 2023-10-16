@@ -22,8 +22,8 @@ REST Application Example with using https://github.com/exgamer/go-rest-sdk
 
 11 Healthcheck liveness endpoint: curl --location 'http://0.0.0.0:8090/healthcheck/liveness'
 
-12 Swagger docs curl --location 'http://localhost:8090/example-service/api-docs/index.html'
-13 Swagger docs curl --location 'http://localhost:8090/swagger/doc.json'
+12 Swagger docs curl --location 'http://localhost:8090/example-go/api-docs/index.html'
+13 Swagger docs curl --location 'http://localhost:8090/example-go/api-docs/doc.json'
 
 14 [Create docker image for your rest application](manual/HOW_TO_CREATE_DOCKER_FOR_GO_SERVICE.MD)
 
