@@ -23,7 +23,7 @@ func SetRoutes(
 	// healthcheck
 	healthcheck := router.Group("/healthcheck")
 	{
-		healthcheck.Use(middleware.ResponseHandler)
+		healthcheck.Use(middleware.ResponseHandler(appConfig))
 		healthcheck.GET("/readiness", func(c *gin.Context) {
 			db.Ping()
 			httpResponse.Response(c, http.StatusOK, map[string]any{
@@ -45,7 +45,7 @@ func SetRoutes(
 	// Routers
 	v1 := router.Group("/example-go/v1")
 	{
-		v1.Use(middleware.ResponseHandler)
+		v1.Use(middleware.ResponseHandler(appConfig))
 		v1.Use(middleware.PinbaHandler(appConfig))
 		v1.GET("/test", controllersFactory.PostController.All())
 	}
