@@ -32,6 +32,14 @@ type CityHandler struct {
 //				@Router			/rest-template/v1/city [get]
 func (h *CityHandler) GetCity() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		//appInfo := gin2.GetAppInfo(c)
+		//
+		//spew.Dump(appInfo)
+		//
+		//httpInfo := gin2.GetHttpInfo(c)
+		//
+		//spew.Dump(httpInfo)
+
 		item, err := h.cityService.GetCity()
 
 		if err != nil {

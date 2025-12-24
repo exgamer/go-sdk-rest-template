@@ -16,6 +16,5 @@ type CityService struct {
 }
 
 func (s *CityService) GetCity() (*models.City, error) {
-
 	return &models.City{Name: "Алматы"}, nil
 }

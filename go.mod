@@ -4,7 +4,7 @@ go 1.24.10
 
 require (
 	github.com/exgamer/gosdk-core v0.0.18-dev
-	github.com/exgamer/gosdk-http-core v0.0.7-dev
+	github.com/exgamer/gosdk-http-core v0.0.10-dev
 	github.com/gin-gonic/gin v1.9.1
 )
 
