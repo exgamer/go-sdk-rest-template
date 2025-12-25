@@ -18,14 +18,10 @@ func SetRoutes(
 
 	service := router.Group("/rest-template")
 	{
-		baseConfig, err := app.GetBaseConfig(a)
-		if err != nil {
-			return err
-		}
-
 		// Middleware
-		service.Use(middleware.RequestInfoMiddleware(baseConfig)) // заполнение структур по инфе базовый и http
-		service.Use(middleware.LoggerMiddleware())                // форматированные логи
+		service.Use(middleware.RequestInfoMiddleware(a)) // заполнение структур по инфе базовый и http
+		service.Use(middleware.LoggerMiddleware())       // форматированные логи
+		service.Use(middleware.DebugMiddleware())        // дебаг инфа в ответе от сервиса
 
 		v1 := service.Group("/v1")
 		{

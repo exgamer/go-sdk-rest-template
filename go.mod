@@ -3,8 +3,8 @@ module github.com/exgamer/go-sdk-rest-template
 go 1.24.10
 
 require (
-	github.com/exgamer/gosdk-core v0.0.18-dev
-	github.com/exgamer/gosdk-http-core v0.0.12-dev
+	github.com/exgamer/gosdk-core v0.0.20-dev
+	github.com/exgamer/gosdk-http-core v0.0.16-dev
 	github.com/gin-gonic/gin v1.9.1
 	github.com/swaggo/swag v1.8.12
 )
