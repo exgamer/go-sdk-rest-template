@@ -21,7 +21,7 @@ func SetRoutes(
 		// Middleware
 		service.Use(middleware.RequestInfoMiddleware(a)) // заполнение структур по инфе базовый и http
 		service.Use(middleware.LoggerMiddleware())       // форматированные логи
-		service.Use(middleware.DebugMiddleware())        // дебаг инфа в ответе от сервиса
+		service.Use(middleware.DebugMiddleware())        // дебаг инфа в ответе от сервиса (только для DEBUG=true)
 
 		v1 := service.Group("/v1")
 		{
