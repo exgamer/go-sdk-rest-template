@@ -108,8 +108,15 @@ HTTP kernel:
 [Пример роутов модуля](internal/domains/handbook/modules/city/routes.go)
 
 ---
+### Нейминг
 
 [Рекомендации по неймингу файлов и структур](NAMING.md)
+
+---
+
+### SWAGGER
+
+[Работа со SWAGGER](SWAGGER.MD)
 
 ---
 

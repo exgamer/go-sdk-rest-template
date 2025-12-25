@@ -24,12 +24,13 @@ func SetRoutes(
 		}
 
 		// Middleware
-		service.Use(middleware.RequestInfoMiddleware(baseConfig))
-		service.Use(middleware.LoggerMiddleware())
+		service.Use(middleware.RequestInfoMiddleware(baseConfig)) // заполнение структур по инфе базовый и http
+		service.Use(middleware.LoggerMiddleware())                // форматированные логи
 
 		v1 := service.Group("/v1")
 		{
-			v1.Use(middleware.FormattedResponseMiddleware())
+			v1.Use(middleware.FormattedResponseMiddleware()) // форматированный ответ
+			v1.Use(middleware.MetricsMiddleware(a))          // метрики прометея
 			v1.GET("/city", cityHandlersFactory.CityHandler.GetCity())
 		}
 	}

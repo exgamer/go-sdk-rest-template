@@ -27,7 +27,7 @@ type CityHandler struct {
 //				@Tags			city
 //				@Accept			json
 //				@Produce		json
-//				@Success		200 {object} responses.CityItemResponse
+//				@Success		200 {object}   responses.OneItemResponse
 //				@Failure        500  {object}  structures.InternalServerResponse  "Внутренняя ошибка сервера"
 //				@Router			/rest-template/v1/city [get]
 func (h *CityHandler) GetCity() gin.HandlerFunc {
@@ -52,8 +52,8 @@ func (h *CityHandler) GetCity() gin.HandlerFunc {
 	}
 }
 
-func (h *CityHandler) oneResponse(item *models.City) *responses.CityItemResponse {
-	return &responses.CityItemResponse{
+func (h *CityHandler) oneResponse(item *models.City) *responses.CityItem {
+	return &responses.CityItem{
 		Name: item.Name,
 	}
 }

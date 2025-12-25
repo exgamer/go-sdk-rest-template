@@ -1,5 +1,5 @@
 package responses
 
-type CityItemResponse struct {
+type CityItem struct {
 	Name string `json:"name"`
 }
