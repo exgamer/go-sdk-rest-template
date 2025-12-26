@@ -1,7 +1,7 @@
 package factories
 
 import (
-	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/http/city/handlers"
+	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/http/city/v1/handlers"
 )
 
 func NewCityHandlersFactory(cityServicesFactory *CityServicesFactory) *CityHandlersFactory {

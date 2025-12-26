@@ -1,0 +1,124 @@
+package handlers
+
+import (
+	"errors"
+	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/dal/database/models"
+	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/http/city/v1/factories"
+	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/http/city/v1/requests"
+	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/http/city/v1/responses"
+	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/services"
+	"github.com/exgamer/gosdk-db-core/pkg/query/pagination"
+	"github.com/exgamer/gosdk-http-core/pkg/helpers"
+	_ "github.com/exgamer/gosdk-http-core/pkg/structures"
+	"github.com/exgamer/gosdk-http-core/validators"
+	"github.com/gin-gonic/gin"
+	"net/http"
+)
+
+func NewCityHandler(cityService *services.CityService) *CityHandler {
+	return &CityHandler{
+		cityService: cityService,
+	}
+}
+
+type CityHandler struct {
+	cityService *services.CityService
+}
+
+//		@Summary		Список городов
+//		@Description	Список городов
+//		@Tags			city
+//		@Accept			json
+//		@Produce		json
+//	    @Param			message	query		requests.CityIndexRequest	true	"Search Cities"
+//		@Success		200 {object} responses.CityPaginatedResponse
+//	    @Failure        500  {object} structures.InternalServerResponse  "Внутренняя ошибка сервера"
+//		@Router			/rest-template/v1/cities [get]
+func (h *CityHandler) Index() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		pagerRequest, err := helpers.GetPagerRequest(c)
+
+		if err != nil {
+			helpers.ErrorResponse(c, http.StatusUnprocessableEntity, err, nil)
+
+			return
+		}
+
+		request := requests.CityIndexRequest{}
+		ve := validators.ValidateRequestQuery(c, &request)
+
+		if ve == false {
+			return
+		}
+
+		searchDto := factories.CitySearchFromIndexRequest(request)
+		searchDto.Page = pagerRequest.Page
+		searchDto.PerPage = pagerRequest.PerPage
+		paginated, err := h.cityService.Paginated(c.Request.Context(), searchDto)
+
+		if err != nil {
+			helpers.ErrorResponse(c, http.StatusInternalServerError, err, nil)
+
+			return
+		}
+
+		helpers.SuccessResponse(c, h.paginatedResponse(paginated))
+	}
+}
+
+//			@Summary		Возвращает город по id
+//			@Description	Возвращает город по id
+//			@Tags			city
+//			@Accept			json
+//			@Produce		json
+//	        @Param			id	path		int	true	"ID города"
+//			@Success		200 {object}   responses.CityItemResponse
+//			@Failure        404  {object}  structures.NotFoundErrorResponse   "Запись не найдена"
+//			@Failure        500  {object}  structures.InternalServerResponse  "Внутренняя ошибка сервера"
+//			@Router			/rest-template/v1/city/{id} [get]
+func (h *CityHandler) View() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		id, err := validators.GetIntQueryParam(c, "id")
+
+		if err != nil {
+			return
+		}
+
+		item, err := h.cityService.GetById(c.Request.Context(), uint(id))
+
+		if err != nil {
+			helpers.ErrorResponse(c, http.StatusInternalServerError, err, nil)
+
+			return
+		}
+
+		if item == nil {
+			helpers.ErrorResponse(c, http.StatusNotFound, errors.New("Not Found"), nil)
+
+			return
+		}
+
+		helpers.SuccessResponse(c, h.oneResponse(item))
+	}
+}
+
+func (h *CityHandler) oneResponse(item *models.City) *responses.CityItem {
+	return &responses.CityItem{
+		Id:   item.ID,
+		Name: item.Name,
+	}
+}
+
+func (h *CityHandler) paginatedResponse(paginated *pagination.Paginated[models.City]) *responses.CityPaginated {
+	e := &responses.CityPaginated{}
+	e.Pagination = *paginated.Pagination
+	items := make([]*responses.CityItem, 0)
+
+	for _, item := range paginated.Items {
+		items = append(items, h.oneResponse(item))
+	}
+
+	e.Items = items
+
+	return e
+}

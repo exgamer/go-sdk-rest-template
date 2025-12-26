@@ -4,8 +4,9 @@ go 1.24.10
 
 require (
 	github.com/exgamer/gosdk-core v0.0.21-dev
-	github.com/exgamer/gosdk-http-core v0.0.28-dev
-	github.com/exgamer/gosdk-postgres-core v0.0.0-20251226071046-74f76b78a12a
+	github.com/exgamer/gosdk-db-core v0.0.2-dev
+	github.com/exgamer/gosdk-http-core v0.0.30-dev
+	github.com/exgamer/gosdk-postgres-core v0.0.2-dev
 	github.com/gin-gonic/gin v1.9.1
 	github.com/swaggo/swag v1.8.12
 	gorm.io/gorm v1.25.10
@@ -20,7 +21,6 @@ require (
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20221115062448-fe3a3abad311 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/exgamer/gosdk-db-core v0.0.0-20251226070820-9b3c7e8f97f9 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.2 // indirect
 	github.com/getsentry/sentry-go v0.24.1 // indirect

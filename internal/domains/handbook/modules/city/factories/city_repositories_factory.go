@@ -1,7 +1,7 @@
 package factories
 
 import (
-	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/repositories"
+	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/dal/database/repositories"
 	"gorm.io/gorm"
 )
 

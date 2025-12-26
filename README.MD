@@ -107,6 +107,10 @@ HTTP kernel:
 - регистрирует свои зависимости
 - добавляет HTTP-роуты
 
+### Пример работы с запросами
+
+[Пример работы с запросами](internal/domains/handbook/modules/city/dal/database/repositories/city_repository.go)
+
 ### Пример модуля
 
 [Пример бизнес модуля](internal/domains/handbook/modules/city/module.go)
