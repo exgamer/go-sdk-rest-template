@@ -2,12 +2,9 @@ package handlers
 
 import (
 	"errors"
-	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/dal/database/models"
 	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/http/city/v1/factories"
 	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/http/city/v1/requests"
-	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/http/city/v1/responses"
 	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/services"
-	"github.com/exgamer/gosdk-db-core/pkg/query/pagination"
 	"github.com/exgamer/gosdk-http-core/pkg/helpers"
 	_ "github.com/exgamer/gosdk-http-core/pkg/structures"
 	"github.com/exgamer/gosdk-http-core/validators"
@@ -51,7 +48,7 @@ func (h *CityHandler) Index() gin.HandlerFunc {
 			return
 		}
 
-		searchDto := factories.CitySearchFromIndexRequest(request)
+		searchDto := factories.CitySearch(request)
 		searchDto.Page = pagerRequest.Page
 		searchDto.PerPage = pagerRequest.PerPage
 		paginated, err := h.cityService.Paginated(c.Request.Context(), searchDto)
@@ -62,7 +59,7 @@ func (h *CityHandler) Index() gin.HandlerFunc {
 			return
 		}
 
-		helpers.SuccessResponse(c, h.paginatedResponse(paginated))
+		helpers.SuccessResponse(c, factories.PaginatedResponse(paginated))
 	}
 }
 
@@ -98,27 +95,6 @@ func (h *CityHandler) View() gin.HandlerFunc {
 			return
 		}
 
-		helpers.SuccessResponse(c, h.oneResponse(item))
+		helpers.SuccessResponse(c, factories.OneResponse(item))
 	}
-}
-
-func (h *CityHandler) oneResponse(item *models.City) *responses.CityItem {
-	return &responses.CityItem{
-		Id:   item.ID,
-		Name: item.Name,
-	}
-}
-
-func (h *CityHandler) paginatedResponse(paginated *pagination.Paginated[models.City]) *responses.CityPaginated {
-	e := &responses.CityPaginated{}
-	e.Pagination = *paginated.Pagination
-	items := make([]*responses.CityItem, 0)
-
-	for _, item := range paginated.Items {
-		items = append(items, h.oneResponse(item))
-	}
-
-	e.Items = items
-
-	return e
 }
