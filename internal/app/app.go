@@ -4,6 +4,7 @@ import (
 	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city"
 	"github.com/exgamer/gosdk-core/pkg/app"
 	http "github.com/exgamer/gosdk-http-core/pkg/app"
+	postgresCore "github.com/exgamer/gosdk-postgres-core/pkg/app"
 )
 
 type App struct {
@@ -16,6 +17,7 @@ func NewApp() (*App, error) {
 	}
 
 	err := appInstance.RegisterAndInitKernels(
+		&postgresCore.PostgresKernel{},
 		&http.HttpKernel{},
 	)
 	if err != nil {
