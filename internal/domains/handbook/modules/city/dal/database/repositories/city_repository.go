@@ -69,3 +69,67 @@ func (r *CityRepository) GetById(ctx context.Context, id uint) (*models.City, er
 
 	return &model, nil
 }
+
+func (r *CityRepository) Create(ctx context.Context, model *models.City) (*models.City, error) {
+	ctx, cancel := context.WithTimeout(ctx, 10*time.Second)
+	defer cancel()
+
+	result := r.client.WithContext(ctx).Create(model)
+
+	if result.Error != nil {
+		return nil, result.Error
+	}
+
+	return model, nil
+}
+
+func (r *CityRepository) Update(ctx context.Context, model *models.City) error {
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	result := r.client.WithContext(ctx).Save(model)
+
+	if result.Error != nil {
+		return result.Error
+	}
+
+	return nil
+}
+
+func (r *CityRepository) Delete(ctx context.Context, id uint) error {
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+	result := r.client.WithContext(ctx).Delete(models.City{}, "id=?", id)
+
+	if result.Error != nil {
+		return result.Error
+	}
+
+	return nil
+}
+
+func (r *CityRepository) Activate(ctx context.Context, id uint) error {
+	ctx, cancel := context.WithTimeout(ctx, 10*time.Second)
+	defer cancel()
+
+	result := r.client.WithContext(ctx).Model(models.City{}).Where("id=?", id).Update("status", 1)
+
+	if result.Error != nil {
+		return result.Error
+	}
+
+	return nil
+}
+
+func (r *CityRepository) Deactivate(ctx context.Context, id uint) error {
+	ctx, cancel := context.WithTimeout(ctx, 10*time.Second)
+	defer cancel()
+
+	result := r.client.WithContext(ctx).Model(models.City{}).Where("id=?", id).Update("status", 0)
+
+	if result.Error != nil {
+		return result.Error
+	}
+
+	return nil
+}

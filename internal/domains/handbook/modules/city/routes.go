@@ -30,6 +30,9 @@ func SetRoutes(
 			v1.Use(middleware.MetricsMiddleware(a))          // метрики прометея
 			v1.GET("/cities", cityHandlersFactory.CityHandler.Index())
 			v1.GET("/city/:id", cityHandlersFactory.CityHandler.View())
+			v1.POST("/city", cityHandlersFactory.CityHandler.Create())
+			v1.PUT("/city/:id", cityHandlersFactory.CityHandler.Update())
+			v1.DELETE("/city/:id", cityHandlersFactory.CityHandler.Delete())
 		}
 	}
 

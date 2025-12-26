@@ -70,6 +70,7 @@ func (h *CityHandler) Index() gin.HandlerFunc {
 //			@Produce		json
 //	        @Param			id	path		int	true	"ID города"
 //			@Success		200 {object}   responses.CityItemResponse
+//		    @Failure		400	{object}	structures.BadRequestErrorResponse				"Плохой запрос"
 //			@Failure        404  {object}  structures.NotFoundErrorResponse   "Запись не найдена"
 //			@Failure        500  {object}  structures.InternalServerResponse  "Внутренняя ошибка сервера"
 //			@Router			/rest-template/v1/city/{id} [get]
@@ -78,6 +79,8 @@ func (h *CityHandler) View() gin.HandlerFunc {
 		id, err := validators.GetIntQueryParam(c, "id")
 
 		if err != nil {
+			helpers.ErrorResponse(c, http.StatusBadRequest, err, nil)
+
 			return
 		}
 
@@ -96,5 +99,117 @@ func (h *CityHandler) View() gin.HandlerFunc {
 		}
 
 		helpers.SuccessResponse(c, factories.OneResponse(item))
+	}
+}
+
+//			@Summary		Создать город
+//			@Description	Создать город
+//			@Tags			city
+//			@Accept			json
+//			@Produce		json
+//			@Param			message	body requests.CityCreateRequest	true	"Create city"
+//			@Success		201 {object} responses.CityItemResponse
+//		    @Failure		422	{object}	structures.ValidationErrorResponse				"Ошибка валидации параметров"
+//		    @Failure		500	{object}	structures.InternalServerResponse				"Внутренняя ошибка сервера"
+//	     @Router			/rest-template/v1/city/ [post]
+func (h *CityHandler) Create() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		request := requests.CityCreateRequest{}
+		ve := validators.ValidateRequestBody(c, &request)
+
+		if ve == false {
+			return
+		}
+
+		m := factories.CityModelFromCreateRequest(request)
+		model, err := h.cityService.Create(c, m)
+
+		if err != nil {
+			helpers.ErrorResponse(c, http.StatusInternalServerError, err, nil)
+
+			return
+		}
+
+		helpers.SuccessCreatedResponse(c, factories.OneResponse(model))
+
+		return
+	}
+}
+
+//			@Summary		Создать город
+//			@Description	Создать город
+//			@Tags			city
+//			@Accept			json
+//			@Produce		json
+//		    @Param			id	path		int	true	"ID города"
+//			@Param			message	body requests.CityCreateRequest	true	"Create city"
+//			@Success		201 {object} responses.CityItemResponse
+//		    @Failure		400	{object}	structures.BadRequestErrorResponse				"Плохой запрос"
+//		    @Failure		422	{object}	structures.ValidationErrorResponse				"Ошибка валидации параметров"
+//		    @Failure		500	{object}	structures.InternalServerResponse				"Внутренняя ошибка сервера"
+//	     @Router			/rest-template/v1/city/{id} [put]
+func (h *CityHandler) Update() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		id, err := validators.GetIntQueryParam(c, "id")
+
+		if err != nil {
+			helpers.ErrorResponse(c, http.StatusBadRequest, err, nil)
+
+			return
+		}
+
+		request := requests.CityCreateRequest{}
+		ve := validators.ValidateRequestBody(c, &request)
+
+		if ve == false {
+			return
+		}
+
+		m := factories.CityModelFromCreateRequest(request)
+		m.ID = uint(id)
+		model, err := h.cityService.Update(c, m)
+
+		if err != nil {
+			helpers.ErrorResponse(c, http.StatusInternalServerError, err, nil)
+
+			return
+		}
+
+		helpers.SuccessCreatedResponse(c, factories.OneResponse(model))
+
+		return
+	}
+}
+
+//			@Summary		удалить город
+//			@Description	удалить город
+//			@Tags			city
+//			@Accept			json
+//			@Produce		json
+//		    @Success		204
+//			Failure		    400	{object}	structures.BadRequestErrorResponse				"Плохой запрос"
+//	     @Failure		500	{object}	structures.InternalServerResponse				"Внутренняя ошибка сервера"
+//	     @Router			/rest-template/v1/city/{id} [delete]
+func (h *CityHandler) Delete() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		id, err := validators.GetIntQueryParam(c, "id")
+
+		if err != nil {
+			helpers.ErrorResponse(c, http.StatusBadRequest, err, nil)
+
+			return
+		}
+
+		err = h.cityService.Delete(c.Request.Context(), uint(id))
+
+		if err != nil {
+			helpers.ErrorResponse(c, http.StatusInternalServerError, err, nil)
+
+			return
+		}
+
+		helpers.SuccessDeletedResponse(c, nil)
+
+		return
 	}
 }

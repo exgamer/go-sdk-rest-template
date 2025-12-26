@@ -15,6 +15,18 @@ func CitySearch(req requests.CityIndexRequest) *dto.CitySearch {
 	}
 }
 
+func CityModelFromCreateRequest(req requests.CityCreateRequest) *models.City {
+	return &models.City{
+		Name: req.Name,
+	}
+}
+
+func CityModelFromUpdateRequest(req requests.CityUpdateRequest) *models.City {
+	return &models.City{
+		Name: req.Name,
+	}
+}
+
 func OneResponse(item *models.City) *responses.CityItem {
 	return &responses.CityItem{
 		Id:   item.ID,
