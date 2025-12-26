@@ -3,15 +3,15 @@ module github.com/exgamer/go-sdk-rest-template
 go 1.24.10
 
 require (
-	github.com/exgamer/gosdk-core v0.0.20-dev
-	github.com/exgamer/gosdk-http-core v0.0.24-dev
+	github.com/exgamer/gosdk-core v0.0.21-dev
+	github.com/exgamer/gosdk-http-core v0.0.28-dev
 	github.com/exgamer/gosdk-postgres-core v0.0.0-20251226071046-74f76b78a12a
 	github.com/gin-gonic/gin v1.9.1
 	github.com/swaggo/swag v1.8.12
+	gorm.io/gorm v1.25.10
 )
 
 require (
-	github.com/JGLTechnologies/gin-rate-limit v1.5.4 // indirect
 	github.com/KyleBanks/depth v1.2.1 // indirect
 	github.com/PuerkitoBio/purell v1.1.1 // indirect
 	github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 // indirect
@@ -20,7 +20,6 @@ require (
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20221115062448-fe3a3abad311 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/exgamer/gosdk-db-core v0.0.0-20251226070820-9b3c7e8f97f9 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.2 // indirect
@@ -64,7 +63,6 @@ require (
 	github.com/prometheus/client_model v0.3.0 // indirect
 	github.com/prometheus/common v0.42.0 // indirect
 	github.com/prometheus/procfs v0.10.1 // indirect
-	github.com/redis/go-redis/v9 v9.5.1 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/spf13/afero v1.9.5 // indirect
 	github.com/spf13/cast v1.5.1 // indirect
@@ -90,5 +88,4 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gorm.io/driver/postgres v1.6.0 // indirect
-	gorm.io/gorm v1.25.10 // indirect
 )

@@ -17,11 +17,11 @@ type CityService struct {
 	cityRepository *repositories.CityRepository
 }
 
-func (s *CityService) GetCity(ctx context.Context) (*models.City, error) {
+func (s *CityService) GetCity(ctx context.Context, id uint) (*models.City, error) {
 
 	if dbg := debug.GetDebugFromContext(ctx); dbg != nil {
 		dbg.AddStep("asdfasdf")
 	}
 
-	return &models.City{Name: "Алматы"}, nil
+	return s.cityRepository.GetCityById(ctx, id)
 }

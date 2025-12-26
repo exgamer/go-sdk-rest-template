@@ -28,7 +28,7 @@ func SetRoutes(
 		{
 			v1.Use(middleware.FormattedResponseMiddleware()) // форматированный ответ
 			v1.Use(middleware.MetricsMiddleware(a))          // метрики прометея
-			v1.GET("/city", cityHandlersFactory.CityHandler.GetCity())
+			v1.GET("/city/:id", cityHandlersFactory.CityHandler.View())
 		}
 	}
 
