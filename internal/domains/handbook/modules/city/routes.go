@@ -22,6 +22,7 @@ func SetRoutes(
 		service.Use(middleware.RequestInfoMiddleware(a)) // заполнение структур по инфе базовый и http
 		service.Use(middleware.LoggerMiddleware())       // форматированные логи
 		service.Use(middleware.DebugMiddleware())        // дебаг инфа в ответе от сервиса (только для DEBUG=true)
+		service.Use(middleware.SentryMiddleware())       // мидлвейр для отправки ошибок в сентри (если указан SENTRY_DSN= и AppException.TrackInSentry = true)
 
 		v1 := service.Group("/v1")
 		{

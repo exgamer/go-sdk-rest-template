@@ -4,7 +4,7 @@ go 1.24.10
 
 require (
 	github.com/exgamer/gosdk-core v0.0.20-dev
-	github.com/exgamer/gosdk-http-core v0.0.16-dev
+	github.com/exgamer/gosdk-http-core v0.0.24-dev
 	github.com/gin-gonic/gin v1.9.1
 	github.com/swaggo/swag v1.8.12
 )
