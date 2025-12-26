@@ -83,6 +83,10 @@ go run cmd/service/main.go
 - создаёт DI контейнер
 - регистрирует kernels
 - запускает бизнес-модули
+- 
+### Пример App
+
+[Пример приложения](internal/app/app.go)
 
 ### HTTP Kernel
 
