@@ -66,7 +66,15 @@ SERVER_ADDRESS=0.0.0.0:8090
 SWAGGER_PREFIX=rest-template
 HANDLER_TIMEOUT=30
 SENTRY_DSN=
-GIN_MODE=debug
+
+POSTGRES_DB_HOST=localhost
+POSTGRES_DB_USER=admin
+POSTGRES_DB_PASSWORD=admin
+POSTGRES_DB_NAME=test
+POSTGRES_DB_PORT=5432
+POSTGRES_DB_MAX_OPEN_CONNECTIONS=100
+POSTGRES_DB_MAX_IDLE_CONNECTIONS=10
+POSTGRES_DB_LOG_LEVEL=info    // вывод логов SQL  запросов "info", "errors",  "warnings", если логи не нужны не указывать
 ```
 
 ### 3. Запуск

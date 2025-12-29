@@ -4,9 +4,9 @@ go 1.24.10
 
 require (
 	github.com/exgamer/gosdk-core v0.0.21-dev
-	github.com/exgamer/gosdk-db-core v0.0.2-dev
+	github.com/exgamer/gosdk-db-core v0.0.4-dev
 	github.com/exgamer/gosdk-http-core v0.0.30-dev
-	github.com/exgamer/gosdk-postgres-core v0.0.2-dev
+	github.com/exgamer/gosdk-postgres-core v0.0.3-dev
 	github.com/gin-gonic/gin v1.9.1
 	github.com/swaggo/swag v1.8.12
 	gorm.io/gorm v1.25.10
