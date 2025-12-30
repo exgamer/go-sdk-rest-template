@@ -101,10 +101,15 @@ go run main.go
 
 ### HTTP Kernel
 
-HTTP kernel:
 - поднимает Gin server
 - регистрирует router в DI
 - управляет жизненным циклом HTTP
+- [Документация GOSDK-HTTP-CORE](https://github.com/exgamer/gosdk-http-core)
+
+### POSTGRES Kernel
+
+- Инициализирует соединение POSTGRES
+- [Документация GOSDK-POSTGRES-CORE](https://github.com/exgamer/gosdk-postgres-core)
 
 ---
 
