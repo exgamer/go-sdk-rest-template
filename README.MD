@@ -8,8 +8,12 @@
 Для более детализированной нформации ознакомьтесь в документацей к `gosdk-core`, `gosdk-db-core` и `gosdk-http-core` (README.MD в корне пакетов)
 
 ---
-❗TODO добавить ссылки на README других пакетов
-
+ - [Документация GOSDK-CORE](https://github.com/exgamer/gosdk-core)
+ - [Документация GOSDK-HTTP-CORE](https://github.com/exgamer/gosdk-http-core)
+ - [Документация GOSDK-DB-CORE](https://github.com/exgamer/gosdk-db-core)
+ - [Документация GOSDK-POSTGRES-CORE](https://github.com/exgamer/gosdk-postgres-core)
+ - [Документация GOSDK-POSTGRES-CORE](https://github.com/exgamer/gosdk-postgres-core)
+ - [Документация GOSDK-HTTP-REQUEST-BUILDER](https://github.com/exgamer/gosdk-http-request-builder)
 --- 
 
 ## 🚀 Что даёт шаблон
