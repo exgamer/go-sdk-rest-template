@@ -126,6 +126,14 @@ HTTP kernel:
 [Пример роутов модуля](internal/domains/handbook/modules/city/routes.go)
 
 ---
+### Режим отладки
+
+- [Работа с Debug Collector](https://github.com/exgamer/gosdk-core/blob/main/pkg/debug/README.MD)
+
+- [Отладочная информация в ответе от API ](https://github.com/exgamer/gosdk-http-core/blob/main/DEBUG_MODE.MD)
+
+
+---
 ### HTTP запросы
 
 Для HTTP запросов используется пакет `gosdk-http-request-builder` (документацию смотри в README пакета)
