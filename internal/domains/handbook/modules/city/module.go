@@ -21,7 +21,8 @@ func (m *Module) Init(a *app.App) error {
 	}
 
 	repositoryFactory := factories.NewCityRepositoriesFactory(client)
-	servicesFactory := factories.NewCityServicesFactory(repositoryFactory)
+	httpRepositoryFactory := factories.NewCityHttpRepositoriesFactory()
+	servicesFactory := factories.NewCityServicesFactory(repositoryFactory, httpRepositoryFactory)
 	handlersFactory := factories.NewCityHandlersFactory(servicesFactory)
 
 	err = SetRoutes(a, handlersFactory)

@@ -6,7 +6,7 @@ import (
 
 func NewCityHandlersFactory(cityServicesFactory *CityServicesFactory) *CityHandlersFactory {
 	return &CityHandlersFactory{
-		CityHandler: handlers.NewCityHandler(cityServicesFactory.CityService),
+		CityHandler: handlers.NewCityHandler(cityServicesFactory.CityService, cityServicesFactory.CityHttpService),
 	}
 }
 

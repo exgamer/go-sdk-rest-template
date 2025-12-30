@@ -3,6 +3,7 @@ package factories
 import (
 	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/dal/database/dto"
 	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/dal/database/models"
+	dto2 "github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/dal/http/dto"
 	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/http/city/v1/requests"
 	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/http/city/v1/responses"
 	"github.com/exgamer/gosdk-db-core/pkg/query/pagination"
@@ -24,6 +25,13 @@ func CityModelFromCreateRequest(req requests.CityCreateRequest) *models.City {
 func CityModelFromUpdateRequest(req requests.CityUpdateRequest) *models.City {
 	return &models.City{
 		Name: req.Name,
+	}
+}
+
+func OneResponseFromDto(item *dto2.City) *responses.CityItem {
+	return &responses.CityItem{
+		Id:   item.ID,
+		Name: item.Name,
 	}
 }
 

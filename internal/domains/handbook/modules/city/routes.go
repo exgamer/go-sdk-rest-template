@@ -33,6 +33,7 @@ func SetRoutes(
 			v1.POST("/city", cityHandlersFactory.CityHandler.Create())
 			v1.PUT("/city/:id", cityHandlersFactory.CityHandler.Update())
 			v1.DELETE("/city/:id", cityHandlersFactory.CityHandler.Delete())
+			v1.GET("/city/by-http", cityHandlersFactory.CityHandler.ViewByHttp())
 		}
 	}
 

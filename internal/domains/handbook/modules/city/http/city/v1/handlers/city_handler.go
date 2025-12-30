@@ -7,19 +7,21 @@ import (
 	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/services"
 	"github.com/exgamer/gosdk-http-core/pkg/helpers"
 	_ "github.com/exgamer/gosdk-http-core/pkg/structures"
-	"github.com/exgamer/gosdk-http-core/validators"
+	"github.com/exgamer/gosdk-http-core/pkg/validators"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
 
-func NewCityHandler(cityService *services.CityService) *CityHandler {
+func NewCityHandler(cityService *services.CityService, cityHttpService *services.CityHttpService) *CityHandler {
 	return &CityHandler{
-		cityService: cityService,
+		cityService:     cityService,
+		cityHttpService: cityHttpService,
 	}
 }
 
 type CityHandler struct {
-	cityService *services.CityService
+	cityService     *services.CityService
+	cityHttpService *services.CityHttpService
 }
 
 //		@Summary		Список городов
@@ -211,5 +213,19 @@ func (h *CityHandler) Delete() gin.HandlerFunc {
 		helpers.SuccessDeletedResponse(c, nil)
 
 		return
+	}
+}
+
+func (h *CityHandler) ViewByHttp() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		item, err := h.cityHttpService.GetCity(c.Request.Context())
+
+		if err != nil {
+			helpers.ErrorResponse(c, http.StatusInternalServerError, err, nil)
+
+			return
+		}
+
+		helpers.SuccessResponse(c, factories.OneResponseFromDto(item))
 	}
 }

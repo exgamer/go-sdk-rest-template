@@ -5,7 +5,8 @@ go 1.24.10
 require (
 	github.com/exgamer/gosdk-core v0.0.21-dev
 	github.com/exgamer/gosdk-db-core v0.0.4-dev
-	github.com/exgamer/gosdk-http-core v0.0.30-dev
+	github.com/exgamer/gosdk-http-core v0.0.39-dev
+	github.com/exgamer/gosdk-http-request-builder v0.0.4-dev
 	github.com/exgamer/gosdk-postgres-core v0.0.3-dev
 	github.com/gin-gonic/gin v1.9.1
 	github.com/swaggo/swag v1.8.12
@@ -58,6 +59,8 @@ require (
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
+	github.com/motemen/go-loghttp v0.0.0-20231107055348-29ae44b293f4 // indirect
+	github.com/motemen/go-nuts v0.0.0-20220604134737-2658d0104f31 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.8 // indirect
 	github.com/prometheus/client_golang v1.14.0 // indirect
 	github.com/prometheus/client_model v0.3.0 // indirect

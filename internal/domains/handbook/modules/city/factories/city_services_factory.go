@@ -6,12 +6,15 @@ import (
 
 func NewCityServicesFactory(
 	repositoryFactory *CityRepositoriesFactory,
+	cityHttpRepositoriesFactory *CityHttpRepositoriesFactory,
 ) *CityServicesFactory {
 	return &CityServicesFactory{
-		CityService: services.NewCityService(repositoryFactory.CityRepository),
+		CityService:     services.NewCityService(repositoryFactory.CityRepository),
+		CityHttpService: services.NewCityHttpService(cityHttpRepositoriesFactory.CityRepository),
 	}
 }
 
 type CityServicesFactory struct {
-	CityService *services.CityService
+	CityService     *services.CityService
+	CityHttpService *services.CityHttpService
 }
