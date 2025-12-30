@@ -197,7 +197,11 @@ HTTP kernel автоматически мапит ошибки в HTTP-отве�
 
 - `gosdk-core`
 - `gosdk-http-core`
+- `gosdk-db-core`
+- `gosdk-postgres-core`
+- `gosdk-http-request-builder`
 - Gin
+- Gorm
 - Go 1.21+
 
 ---
