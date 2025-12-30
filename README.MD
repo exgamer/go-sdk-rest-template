@@ -115,15 +115,15 @@ HTTP kernel:
 - регистрирует свои зависимости
 - добавляет HTTP-роуты
 
-[Пример работы с запросами](internal/domains/handbook/modules/city/dal/database/repositories/city_repository.go)
+- [Пример работы с запросами](internal/domains/handbook/modules/city/dal/database/repositories/city_repository.go)
 
-[Пример сервиса](internal/domains/handbook/modules/city/services/city_service.go)
+- [Пример сервиса](internal/domains/handbook/modules/city/services/city_service.go)
 
-[Пример контроллера](internal/domains/handbook/modules/city/http/city/v1/handlers/city_handler.go)
+- [Пример контроллера](internal/domains/handbook/modules/city/http/city/v1/handlers/city_handler.go)
 
-[Пример бизнес модуля](internal/domains/handbook/modules/city/module.go)
+- [Пример бизнес модуля](internal/domains/handbook/modules/city/module.go)
 
-[Пример роутов модуля](internal/domains/handbook/modules/city/routes.go)
+- [Пример роутов модуля](internal/domains/handbook/modules/city/routes.go)
 
 ---
 ### Режим отладки
