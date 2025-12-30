@@ -12,7 +12,6 @@
  - [Документация GOSDK-HTTP-CORE](https://github.com/exgamer/gosdk-http-core)
  - [Документация GOSDK-DB-CORE](https://github.com/exgamer/gosdk-db-core)
  - [Документация GOSDK-POSTGRES-CORE](https://github.com/exgamer/gosdk-postgres-core)
- - [Документация GOSDK-POSTGRES-CORE](https://github.com/exgamer/gosdk-postgres-core)
  - [Документация GOSDK-HTTP-REQUEST-BUILDER](https://github.com/exgamer/gosdk-http-request-builder)
 --- 
 
