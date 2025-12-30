@@ -84,7 +84,7 @@ func (r *CityRepository) Create(ctx context.Context, model *models.City) (*model
 }
 
 func (r *CityRepository) Update(ctx context.Context, model *models.City) error {
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, cancel := context.WithTimeout(ctx, 10*time.Second)
 	defer cancel()
 
 	result := r.client.WithContext(ctx).Save(model)
@@ -97,7 +97,7 @@ func (r *CityRepository) Update(ctx context.Context, model *models.City) error {
 }
 
 func (r *CityRepository) Delete(ctx context.Context, id uint) error {
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, cancel := context.WithTimeout(ctx, 10*time.Second)
 	defer cancel()
 	result := r.client.WithContext(ctx).Delete(models.City{}, "id=?", id)
 

@@ -124,7 +124,7 @@ func (h *CityHandler) Create() gin.HandlerFunc {
 		}
 
 		m := factories.CityModelFromCreateRequest(request)
-		model, err := h.cityService.Create(c, m)
+		model, err := h.cityService.Create(c.Request.Context(), m)
 
 		if err != nil {
 			helpers.ErrorResponse(c, http.StatusInternalServerError, err, nil)
@@ -169,7 +169,7 @@ func (h *CityHandler) Update() gin.HandlerFunc {
 
 		m := factories.CityModelFromCreateRequest(request)
 		m.ID = uint(id)
-		model, err := h.cityService.Update(c, m)
+		model, err := h.cityService.Update(c.Request.Context(), m)
 
 		if err != nil {
 			helpers.ErrorResponse(c, http.StatusInternalServerError, err, nil)
