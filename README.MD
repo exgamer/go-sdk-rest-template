@@ -80,7 +80,7 @@ POSTGRES_DB_LOG_LEVEL=info    // вывод логов SQL  запросов "in
 ### 3. Запуск
 
 ```bash
-go run cmd/service/main.go
+go run main.go
 ```
 
 ---
