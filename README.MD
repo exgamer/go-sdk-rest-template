@@ -8,6 +8,8 @@
 Для более детализированной нформации ознакомьтесь в документацей к `gosdk-core`, `gosdk-db-core` и `gosdk-http-core` (README.MD в корне пакетов)
 
 ---
+## Для более детализированной нформации ознакомьтесь в документацей к следующим пакетам 
+
  - [Документация GOSDK-CORE](https://github.com/exgamer/gosdk-core)
  - [Документация GOSDK-HTTP-CORE](https://github.com/exgamer/gosdk-http-core)
  - [Документация GOSDK-DB-CORE](https://github.com/exgamer/gosdk-db-core)
