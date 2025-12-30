@@ -177,7 +177,7 @@ func (h *CityHandler) Update() gin.HandlerFunc {
 			return
 		}
 
-		helpers.SuccessCreatedResponse(c, factories.OneResponse(model))
+		helpers.SuccessResponse(c, factories.OneResponse(model))
 
 		return
 	}
