@@ -97,7 +97,7 @@ go run cmd/service/main.go
 - 
 ### Пример App
 
-[Пример приложения](internal/app/app.go)
+- [Пример приложения](internal/app/app.go)
 
 ### HTTP Kernel
 
@@ -144,13 +144,13 @@ HTTP kernel:
 ---
 ### Нейминг
 
-[Рекомендации по неймингу файлов и структур](NAMING.md)
+- [Рекомендации по неймингу файлов и структур](NAMING.md)
 
 ---
 
 ### SWAGGER
 
-[Работа со SWAGGER](SWAGGER.MD)
+- [Работа со SWAGGER](SWAGGER.MD)
 
 ---
 
