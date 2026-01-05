@@ -1,9 +1,9 @@
 package factories
 
 import (
-	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/dal/database/dto"
 	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/dal/database/models"
 	dto2 "github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/dal/http/dto"
+	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/dto"
 	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/http/city/v1/requests"
 	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/http/city/v1/responses"
 	"github.com/exgamer/gosdk-db-core/pkg/query/pagination"

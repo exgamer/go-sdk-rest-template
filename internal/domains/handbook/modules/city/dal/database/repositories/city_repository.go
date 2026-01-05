@@ -3,8 +3,8 @@ package repositories
 import (
 	"context"
 	"errors"
-	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/dal/database/dto"
 	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/dal/database/models"
+	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/dto"
 	"github.com/exgamer/gosdk-db-core/pkg/query/helpers"
 	"github.com/exgamer/gosdk-db-core/pkg/query/pagination"
 	"gorm.io/gorm"

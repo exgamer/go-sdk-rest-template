@@ -2,9 +2,9 @@ package services
 
 import (
 	"context"
-	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/dal/database/dto"
 	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/dal/database/models"
 	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/dal/database/repositories"
+	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/dto"
 	"github.com/exgamer/gosdk-core/pkg/debug"
 	"github.com/exgamer/gosdk-db-core/pkg/query/pagination"
 )
