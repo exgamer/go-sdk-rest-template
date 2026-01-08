@@ -187,6 +187,14 @@ HTTP kernel автоматически мапит ошибки в HTTP-отве�
 
 ---
 
+## Логирование
+
+- [Пример работы с логами](https://github.com/exgamer/gosdk-core/blob/v1.0.2/pkg/logger/README.md)
+
+- [Пример работы с логами HTTP](https://github.com/exgamer/gosdk-http-core/blob/main/pkg/logger/README.md)
+
+---
+
 ## ♻️ Graceful Shutdown
 
 Приложение корректно:
