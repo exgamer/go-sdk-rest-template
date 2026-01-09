@@ -60,7 +60,7 @@ APP_NAME=rest-template
 APP_ENV=local
 APP_VERSION=1.0
 TIMEZONE=
-DEBUG=true
+LOG_LEVEL=DEBUG
 
 SERVER_ADDRESS=0.0.0.0:8090
 SWAGGER_PREFIX=rest-template
@@ -134,6 +134,8 @@ go run main.go
 ### Режим отладки
 
 - [Работа с Debug Collector](https://github.com/exgamer/gosdk-core/blob/main/pkg/debug/README.MD)
+
+- [Логирование ](https://github.com/exgamer/gosdk-core/blob/main/pkg/logger/README.md)
 
 - [Отладочная информация в ответе от API ](https://github.com/exgamer/gosdk-http-core/blob/main/DEBUG_MODE.MD)
 
