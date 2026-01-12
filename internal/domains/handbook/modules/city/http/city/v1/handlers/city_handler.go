@@ -9,7 +9,6 @@ import (
 	_ "github.com/exgamer/gosdk-http-core/pkg/structures"
 	"github.com/exgamer/gosdk-http-core/pkg/validators"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
 func NewCityHandler(cityService *services.CityService, cityHttpService *services.CityHttpService) *CityHandler {
@@ -38,7 +37,7 @@ func (h *CityHandler) Index() gin.HandlerFunc {
 		pagerRequest, err := helpers.GetPagerRequest(c)
 
 		if err != nil {
-			helpers.ErrorResponse(c, http.StatusUnprocessableEntity, err, nil)
+			helpers.UnprocessableEntityResponse(c, err, nil)
 
 			return
 		}
@@ -56,7 +55,7 @@ func (h *CityHandler) Index() gin.HandlerFunc {
 		paginated, err := h.cityService.Paginated(c.Request.Context(), searchDto)
 
 		if err != nil {
-			helpers.ErrorResponse(c, http.StatusInternalServerError, err, nil)
+			helpers.InternalServerErrorResponse(c, err, nil)
 
 			return
 		}
@@ -81,7 +80,7 @@ func (h *CityHandler) View() gin.HandlerFunc {
 		id, err := validators.GetIntQueryParam(c, "id")
 
 		if err != nil {
-			helpers.ErrorResponse(c, http.StatusBadRequest, err, nil)
+			helpers.BadRequestResponse(c, err, nil)
 
 			return
 		}
@@ -89,13 +88,13 @@ func (h *CityHandler) View() gin.HandlerFunc {
 		item, err := h.cityService.GetById(c.Request.Context(), uint(id))
 
 		if err != nil {
-			helpers.ErrorResponse(c, http.StatusInternalServerError, err, nil)
+			helpers.InternalServerErrorResponse(c, err, nil)
 
 			return
 		}
 
 		if item == nil {
-			helpers.ErrorResponse(c, http.StatusNotFound, errors.New("Not Found"), nil)
+			helpers.NotFoundResponse(c, errors.New("Not Found"), nil)
 
 			return
 		}
@@ -127,7 +126,7 @@ func (h *CityHandler) Create() gin.HandlerFunc {
 		model, err := h.cityService.Create(c.Request.Context(), m)
 
 		if err != nil {
-			helpers.ErrorResponse(c, http.StatusInternalServerError, err, nil)
+			helpers.InternalServerErrorResponse(c, err, nil)
 
 			return
 		}
@@ -155,7 +154,7 @@ func (h *CityHandler) Update() gin.HandlerFunc {
 		id, err := validators.GetIntQueryParam(c, "id")
 
 		if err != nil {
-			helpers.ErrorResponse(c, http.StatusBadRequest, err, nil)
+			helpers.BadRequestResponse(c, err, nil)
 
 			return
 		}
@@ -172,7 +171,7 @@ func (h *CityHandler) Update() gin.HandlerFunc {
 		model, err := h.cityService.Update(c.Request.Context(), m)
 
 		if err != nil {
-			helpers.ErrorResponse(c, http.StatusInternalServerError, err, nil)
+			helpers.InternalServerErrorResponse(c, err, nil)
 
 			return
 		}
@@ -197,7 +196,7 @@ func (h *CityHandler) Delete() gin.HandlerFunc {
 		id, err := validators.GetIntQueryParam(c, "id")
 
 		if err != nil {
-			helpers.ErrorResponse(c, http.StatusBadRequest, err, nil)
+			helpers.BadRequestResponse(c, err, nil)
 
 			return
 		}
@@ -205,7 +204,7 @@ func (h *CityHandler) Delete() gin.HandlerFunc {
 		err = h.cityService.Delete(c.Request.Context(), uint(id))
 
 		if err != nil {
-			helpers.ErrorResponse(c, http.StatusInternalServerError, err, nil)
+			helpers.InternalServerErrorResponse(c, err, nil)
 
 			return
 		}
@@ -221,7 +220,7 @@ func (h *CityHandler) ViewByHttp() gin.HandlerFunc {
 		item, err := h.cityHttpService.GetCity(c.Request.Context())
 
 		if err != nil {
-			helpers.ErrorResponse(c, http.StatusInternalServerError, err, nil)
+			helpers.InternalServerErrorResponse(c, err, nil)
 
 			return
 		}

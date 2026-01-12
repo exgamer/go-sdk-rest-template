@@ -72,12 +72,12 @@ github.com/envoyproxy/go-control-plane v0.9.4/go.mod h1:6rpuAdCZL397s3pYoYcLgu1m
 github.com/envoyproxy/go-control-plane v0.9.7/go.mod h1:cwu0lG7PUMfa9snN8LXBig5ynNVH9qI8YYLbd1fK2po=
 github.com/envoyproxy/go-control-plane v0.9.9-0.20201210154907-fd9021fe5dad/go.mod h1:cXg6YxExXjJnVBQHBLXeUAgxn2UodCpnH306RInaBQk=
 github.com/envoyproxy/protoc-gen-validate v0.1.0/go.mod h1:iSmxcyjqTsJpI2R4NaDN7+kN2VEUnK/pcBlmesArF7c=
-github.com/exgamer/gosdk-core v1.0.8 h1:kgZTf6TuR9b8Oe4PQhxxOovaDgCLTW4H/2db7pSdNG0=
-github.com/exgamer/gosdk-core v1.0.8/go.mod h1:fuL76pMIaRotgI/WMRWkXCzOkKO+bhkGNgQnW/KvD5A=
+github.com/exgamer/gosdk-core v1.0.9 h1:blDKqAyKVXDbws1nmMbJaCH5wpW+UMtGJee65wadEkA=
+github.com/exgamer/gosdk-core v1.0.9/go.mod h1:fuL76pMIaRotgI/WMRWkXCzOkKO+bhkGNgQnW/KvD5A=
 github.com/exgamer/gosdk-db-core v1.0.6 h1:fwFj+vJDoppKz5jao5cJiaV+LqJZZp22Okw0wxrS/eU=
 github.com/exgamer/gosdk-db-core v1.0.6/go.mod h1:J9LYpTI8zCD6fpY0MQ7IHBdJwIgokU8dGSx8Un5PJ/0=
-github.com/exgamer/gosdk-http-core v1.0.7 h1:9E30L5XAenf1PQFnrEIVKASEFTRE/1RDHqV2b53DZKc=
-github.com/exgamer/gosdk-http-core v1.0.7/go.mod h1:+4fFQt2ZPnmYRlueHWAovyUiIbSjcTxRJPak/aMBMio=
+github.com/exgamer/gosdk-http-core v1.0.9 h1:QgLk7rCARcFhCIbcZ2asVSiGFceeuLZ1hWvpIi82Dck=
+github.com/exgamer/gosdk-http-core v1.0.9/go.mod h1:ijc8EKi+bT/Tl/JiyW0hN6x6T7zjeIvUitFWNotqB+A=
 github.com/exgamer/gosdk-http-request-builder v1.0.4 h1:aPleIoNdwv2KLjEfFCfZapgSQCI4q6Rml02ttG6u414=
 github.com/exgamer/gosdk-http-request-builder v1.0.4/go.mod h1:TALXHAG4kc4Wb6tdn+dMGl0nUvtanmQUffWq3K1Gc9I=
 github.com/exgamer/gosdk-postgres-core v1.0.5 h1:fWLvoqf7+YUWTPVV8xuOwVCgb1GpGXATQCezSgBsOpA=

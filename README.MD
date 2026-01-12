@@ -187,6 +187,9 @@ if err != nil {
 
 HTTP kernel автоматически мапит ошибки в HTTP-ответы.
 
+- [Обычные исключения](https://github.com/exgamer/gosdk-core/blob/main/pkg/exception/README.MD)
+- [HTTP исключения](https://github.com/exgamer/gosdk-http-core/blob/main/pkg/exception/README.md)
+
 ---
 
 ## Логирование
