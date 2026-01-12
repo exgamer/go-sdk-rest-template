@@ -76,8 +76,8 @@ github.com/exgamer/gosdk-core v1.0.9 h1:blDKqAyKVXDbws1nmMbJaCH5wpW+UMtGJee65wad
 github.com/exgamer/gosdk-core v1.0.9/go.mod h1:fuL76pMIaRotgI/WMRWkXCzOkKO+bhkGNgQnW/KvD5A=
 github.com/exgamer/gosdk-db-core v1.0.6 h1:fwFj+vJDoppKz5jao5cJiaV+LqJZZp22Okw0wxrS/eU=
 github.com/exgamer/gosdk-db-core v1.0.6/go.mod h1:J9LYpTI8zCD6fpY0MQ7IHBdJwIgokU8dGSx8Un5PJ/0=
-github.com/exgamer/gosdk-http-core v1.0.9 h1:QgLk7rCARcFhCIbcZ2asVSiGFceeuLZ1hWvpIi82Dck=
-github.com/exgamer/gosdk-http-core v1.0.9/go.mod h1:ijc8EKi+bT/Tl/JiyW0hN6x6T7zjeIvUitFWNotqB+A=
+github.com/exgamer/gosdk-http-core v1.0.11 h1:MlM5AxWM5tRlpScgh4pLELMw3a0VvDZfTO9RBTIHP90=
+github.com/exgamer/gosdk-http-core v1.0.11/go.mod h1:ijc8EKi+bT/Tl/JiyW0hN6x6T7zjeIvUitFWNotqB+A=
 github.com/exgamer/gosdk-http-request-builder v1.0.4 h1:aPleIoNdwv2KLjEfFCfZapgSQCI4q6Rml02ttG6u414=
 github.com/exgamer/gosdk-http-request-builder v1.0.4/go.mod h1:TALXHAG4kc4Wb6tdn+dMGl0nUvtanmQUffWq3K1Gc9I=
 github.com/exgamer/gosdk-postgres-core v1.0.5 h1:fWLvoqf7+YUWTPVV8xuOwVCgb1GpGXATQCezSgBsOpA=

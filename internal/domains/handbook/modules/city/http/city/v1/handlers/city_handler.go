@@ -6,6 +6,7 @@ import (
 	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/http/city/v1/requests"
 	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/services"
 	"github.com/exgamer/gosdk-http-core/pkg/helpers"
+	"github.com/exgamer/gosdk-http-core/pkg/response"
 	_ "github.com/exgamer/gosdk-http-core/pkg/structures"
 	"github.com/exgamer/gosdk-http-core/pkg/validators"
 	"github.com/gin-gonic/gin"
@@ -37,7 +38,7 @@ func (h *CityHandler) Index() gin.HandlerFunc {
 		pagerRequest, err := helpers.GetPagerRequest(c)
 
 		if err != nil {
-			helpers.UnprocessableEntityResponse(c, err, nil)
+			response.UnprocessableEntity(c, err, nil)
 
 			return
 		}
@@ -55,12 +56,12 @@ func (h *CityHandler) Index() gin.HandlerFunc {
 		paginated, err := h.cityService.Paginated(c.Request.Context(), searchDto)
 
 		if err != nil {
-			helpers.InternalServerErrorResponse(c, err, nil)
+			response.InternalServerError(c, err, nil)
 
 			return
 		}
 
-		helpers.SuccessResponse(c, factories.PaginatedResponse(paginated))
+		response.Success(c, factories.PaginatedResponse(paginated))
 	}
 }
 
@@ -80,7 +81,7 @@ func (h *CityHandler) View() gin.HandlerFunc {
 		id, err := validators.GetIntQueryParam(c, "id")
 
 		if err != nil {
-			helpers.BadRequestResponse(c, err, nil)
+			response.BadRequest(c, err, nil)
 
 			return
 		}
@@ -88,18 +89,18 @@ func (h *CityHandler) View() gin.HandlerFunc {
 		item, err := h.cityService.GetById(c.Request.Context(), uint(id))
 
 		if err != nil {
-			helpers.InternalServerErrorResponse(c, err, nil)
+			response.InternalServerError(c, err, nil)
 
 			return
 		}
 
 		if item == nil {
-			helpers.NotFoundResponse(c, errors.New("Not Found"), nil)
+			response.NotFound(c, errors.New("Not Found"), nil)
 
 			return
 		}
 
-		helpers.SuccessResponse(c, factories.OneResponse(item))
+		response.Success(c, factories.OneResponse(item))
 	}
 }
 
@@ -126,12 +127,12 @@ func (h *CityHandler) Create() gin.HandlerFunc {
 		model, err := h.cityService.Create(c.Request.Context(), m)
 
 		if err != nil {
-			helpers.InternalServerErrorResponse(c, err, nil)
+			response.InternalServerError(c, err, nil)
 
 			return
 		}
 
-		helpers.SuccessCreatedResponse(c, factories.OneResponse(model))
+		response.SuccessCreated(c, factories.OneResponse(model))
 
 		return
 	}
@@ -154,7 +155,7 @@ func (h *CityHandler) Update() gin.HandlerFunc {
 		id, err := validators.GetIntQueryParam(c, "id")
 
 		if err != nil {
-			helpers.BadRequestResponse(c, err, nil)
+			response.BadRequest(c, err, nil)
 
 			return
 		}
@@ -171,12 +172,12 @@ func (h *CityHandler) Update() gin.HandlerFunc {
 		model, err := h.cityService.Update(c.Request.Context(), m)
 
 		if err != nil {
-			helpers.InternalServerErrorResponse(c, err, nil)
+			response.InternalServerError(c, err, nil)
 
 			return
 		}
 
-		helpers.SuccessResponse(c, factories.OneResponse(model))
+		response.Success(c, factories.OneResponse(model))
 
 		return
 	}
@@ -196,7 +197,7 @@ func (h *CityHandler) Delete() gin.HandlerFunc {
 		id, err := validators.GetIntQueryParam(c, "id")
 
 		if err != nil {
-			helpers.BadRequestResponse(c, err, nil)
+			response.BadRequest(c, err, nil)
 
 			return
 		}
@@ -204,12 +205,12 @@ func (h *CityHandler) Delete() gin.HandlerFunc {
 		err = h.cityService.Delete(c.Request.Context(), uint(id))
 
 		if err != nil {
-			helpers.InternalServerErrorResponse(c, err, nil)
+			response.InternalServerError(c, err, nil)
 
 			return
 		}
 
-		helpers.SuccessDeletedResponse(c, nil)
+		response.SuccessDeleted(c, nil)
 
 		return
 	}
@@ -220,11 +221,11 @@ func (h *CityHandler) ViewByHttp() gin.HandlerFunc {
 		item, err := h.cityHttpService.GetCity(c.Request.Context())
 
 		if err != nil {
-			helpers.InternalServerErrorResponse(c, err, nil)
+			response.InternalServerError(c, err, nil)
 
 			return
 		}
 
-		helpers.SuccessResponse(c, factories.OneResponseFromDto(item))
+		response.Success(c, factories.OneResponseFromDto(item))
 	}
 }
