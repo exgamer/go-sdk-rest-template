@@ -17,7 +17,7 @@ type CityRepository struct {
 
 func (r *CityRepository) GetCity(ctx context.Context) (*dto.City, error) {
 	httpInfo := gin.GetHttpInfoFromContext(ctx)
-	b := builder.NewGetHttpRequestBuilder[dto.City](ctx, "http://0.0.0.0:8090/rest-template/v1/city/1").
+	b := builder.NewGetHttpRequestBuilder[builder.Response[dto.City]](ctx, "http://0.0.0.0:8090/rest-template/v1/city/1").
 		SetRequestHeaders(map[string]string{
 			constants.RequestIdHeaderName: httpInfo.RequestId,
 			"Example-Header":              "example-header-value",
