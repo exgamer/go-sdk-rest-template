@@ -3,11 +3,11 @@ module github.com/exgamer/go-sdk-rest-template
 go 1.25.5
 
 require (
-	github.com/exgamer/gosdk-core v1.0.11
-	github.com/exgamer/gosdk-db-core v1.0.8
-	github.com/exgamer/gosdk-http-core v1.0.13
-	github.com/exgamer/gosdk-http-request-builder v1.0.7
-	github.com/exgamer/gosdk-postgres-core v1.0.7
+	github.com/exgamer/gosdk-core v1.0.12
+	github.com/exgamer/gosdk-db-core v1.0.9
+	github.com/exgamer/gosdk-http-core v1.0.17
+	github.com/exgamer/gosdk-http-request-builder v1.0.8
+	github.com/exgamer/gosdk-postgres-core v1.0.9
 	github.com/gin-gonic/gin v1.11.0
 	github.com/swaggo/swag v1.16.6
 	gorm.io/gorm v1.31.1

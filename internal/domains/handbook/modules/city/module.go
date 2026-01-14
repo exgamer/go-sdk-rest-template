@@ -3,7 +3,7 @@ package city
 import (
 	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/factories"
 	"github.com/exgamer/gosdk-core/pkg/app"
-	postgresApp "github.com/exgamer/gosdk-postgres-core/pkg/app"
+	"github.com/exgamer/gosdk-postgres-core/pkg/di"
 )
 
 // Module модуль городов
@@ -15,7 +15,7 @@ func (m *Module) Name() string {
 }
 
 func (m *Module) Init(a *app.App) error {
-	client, err := postgresApp.GetDefaultPostgresConnection(a)
+	client, err := di.GetDefaultPostgresConnection(a.Container)
 	if err != nil {
 		return err
 	}

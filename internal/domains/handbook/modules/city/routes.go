@@ -3,7 +3,7 @@ package city
 import (
 	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city/factories"
 	"github.com/exgamer/gosdk-core/pkg/app"
-	http "github.com/exgamer/gosdk-http-core/pkg/app"
+	"github.com/exgamer/gosdk-http-core/pkg/di"
 	"github.com/exgamer/gosdk-http-core/pkg/middleware"
 )
 
@@ -11,7 +11,7 @@ func SetRoutes(
 	a *app.App,
 	cityHandlersFactory *factories.CityHandlersFactory,
 ) error {
-	router, err := http.GetRouter(a)
+	router, err := di.GetRouter(a.Container)
 	if err != nil {
 		return err
 	}
