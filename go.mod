@@ -3,11 +3,11 @@ module github.com/exgamer/go-sdk-rest-template
 go 1.25.5
 
 require (
-	github.com/exgamer/gosdk-core v1.0.13
-	github.com/exgamer/gosdk-db-core v1.0.10
-	github.com/exgamer/gosdk-http-core v1.0.18
-	github.com/exgamer/gosdk-http-request-builder v1.0.9
-	github.com/exgamer/gosdk-postgres-core v1.0.10
+	github.com/exgamer/gosdk-core v1.0.15
+	github.com/exgamer/gosdk-db-core v1.0.11
+	github.com/exgamer/gosdk-http-core v1.0.20
+	github.com/exgamer/gosdk-http-request-builder v1.0.10
+	github.com/exgamer/gosdk-postgres-core v1.0.11
 	github.com/gin-gonic/gin v1.11.0
 	github.com/swaggo/swag v1.16.6
 	gorm.io/gorm v1.31.1
@@ -23,8 +23,8 @@ require (
 	github.com/cloudwego/base64x v0.1.6 // indirect
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.12 // indirect
-	github.com/getsentry/sentry-go v0.40.0 // indirect
-	github.com/getsentry/sentry-go/gin v0.40.0 // indirect
+	github.com/getsentry/sentry-go v0.41.0 // indirect
+	github.com/getsentry/sentry-go/gin v0.41.0 // indirect
 	github.com/gin-contrib/sse v1.1.0 // indirect
 	github.com/go-errors/errors v1.5.1 // indirect
 	github.com/go-openapi/jsonpointer v0.22.4 // indirect
