@@ -16,7 +16,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	err = appInstance.RunHttpKernel()
+	err = appInstance.RunAll()
 	if err != nil {
 		log.Fatal(err)
 	}
