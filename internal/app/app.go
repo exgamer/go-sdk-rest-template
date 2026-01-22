@@ -35,19 +35,3 @@ func NewApp() (*App, error) {
 
 	return appInstance, nil
 }
-
-func (a *App) RunHttpKernel() error {
-	if err := a.RunKernel(http.HttpKernelName); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (a *App) RunRabbitKernel() error {
-	if err := a.RunKernel(app2.RabbitKernelName); err != nil {
-		return err
-	}
-
-	return nil
-}
