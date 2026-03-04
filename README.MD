@@ -109,15 +109,15 @@ go run main.go
 - регистрирует свои зависимости
 - добавляет HTTP-роуты
 
-- [Пример работы с запросами](internal/domains/handbook/modules/city/dal/database/repositories/city_repository.go)
+- [Пример работы с запросами](internal/infrastructure/postgres/handbook/city/repository.go)
 
-- [Пример сервиса](internal/domains/handbook/modules/city/services/city_service.go)
+- [Пример сервиса](internal/domains/handbook/city/service.go)
 
-- [Пример контроллера](internal/domains/handbook/modules/city/http/city/v1/handlers/city_handler.go)
+- [Пример контроллера](internal/transport/admin/http/handbook/city/handler.go)
 
-- [Пример бизнес модуля](internal/domains/handbook/modules/city/module.go)
+- [Пример бизнес модуля](internal/app/bootstrap/city/module.go)
 
-- [Пример роутов модуля](internal/domains/handbook/modules/city/routes.go)
+- [Пример роутов модуля](internal/transport/admin/http/handbook/city/routes.go)
 
 ---
 ### Режим отладки
