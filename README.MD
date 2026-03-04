@@ -133,7 +133,7 @@ go run main.go
 ### HTTP запросы
 
 Для HTTP запросов используется пакет `gosdk-http-request-builder` (документацию смотри в README пакета)
-- [Пример работы с HTTP запросами](internal/domains/handbook/modules/city/dal/http/repositories/city_repository.go)
+- [Пример работы с HTTP запросами](internal/infrastructure/httpclient/handbook/city/repository.go)
 
 ---
 
