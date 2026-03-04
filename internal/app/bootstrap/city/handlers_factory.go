@@ -1,6 +1,6 @@
 package city
 
-import "github.com/exgamer/go-sdk-rest-template/internal/contexts/admin/http/handbook/city"
+import "github.com/exgamer/go-sdk-rest-template/internal/transport/admin/http/handbook/city"
 
 func newHandlersFactory(cityServicesFactory *servicesFactory) *handlersFactory {
 	return &handlersFactory{

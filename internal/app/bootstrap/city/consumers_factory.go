@@ -1,6 +1,6 @@
 package city
 
-import "github.com/exgamer/go-sdk-rest-template/internal/contexts/consumer/handbbok/city"
+import "github.com/exgamer/go-sdk-rest-template/internal/transport/consumer/handbbok/city"
 
 func newConsumersFactory() *consumersFactory {
 	return &consumersFactory{
