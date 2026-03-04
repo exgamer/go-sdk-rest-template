@@ -1,11 +1,11 @@
 package app
 
 import (
-	"github.com/exgamer/go-sdk-rest-template/internal/domains/handbook/modules/city"
+	"github.com/exgamer/go-sdk-rest-template/internal/app/bootstrap/city"
 	"github.com/exgamer/gosdk-core/pkg/app"
 	http "github.com/exgamer/gosdk-http-core/pkg/app"
-	postgresCore "github.com/exgamer/gosdk-postgres-core/pkg/app"
-	app2 "github.com/exgamer/gosdk-rabbit-core/pkg/app"
+	postgres "github.com/exgamer/gosdk-postgres-core/pkg/app"
+	rabbitapp "github.com/exgamer/gosdk-rabbit-core/pkg/app"
 )
 
 type App struct {
@@ -18,9 +18,9 @@ func NewApp() (*App, error) {
 	}
 
 	err := appInstance.RegisterAndInitKernels(
-		&postgresCore.PostgresKernel{},
+		&postgres.PostgresKernel{},
 		&http.HttpKernel{},
-		app2.NewRabbitKernel().EnableConsumer().EnablePublisher(), // просто для примера работы с несколькими ядрами которые запускаются
+		rabbitapp.NewRabbitKernel().EnableConsumer().EnablePublisher(), // просто для примера работы с несколькими ядрами которые запускаются
 	)
 	if err != nil {
 		return nil, err
