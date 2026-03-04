@@ -30,18 +30,7 @@
 
 ## 📁 Структура проекта
 
-```
-├── internal/
-│   ├── app/               # Инициализация приложения
-│   └── modules/           # Бизнес-модули
-│       ├── common/
-│       └── http/
-├── pkg/
-│   └── contracts/         # Общие интерфейсы (опционально)
-├── go.mod
-├── main.go        # Точка входа
-└── README.md
-```
+[Структура проекта](STRUCTURE.md)
 
 ---
 
@@ -145,13 +134,6 @@ go run main.go
 
 Для HTTP запросов используется пакет `gosdk-http-request-builder` (документацию смотри в README пакета)
 - [Пример работы с HTTP запросами](internal/domains/handbook/modules/city/dal/http/repositories/city_repository.go)
-
----
-
----
-### Нейминг
-
-- [Рекомендации по неймингу файлов и структур](NAMING.md)
 
 ---
 
