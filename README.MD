@@ -1,6 +1,7 @@
 # go-sdk-rest-template
 
-`go-sdk-rest-template` — шаблон REST-сервиса на Go, построенный поверх `gosdk-core`, `gosdk-db-core`, `gosdk-postgres-core`, `gosdk-http-request-builder` и `gosdk-http-core`.
+`go-sdk-rest-template` — шаблон REST-сервиса на Go, построенный поверх `gosdk-core`, 
+`gosdk-db-core`, `gosdk-postgres-core`, `gosdk-http-request-builder`,  `gosdk-redis-core` и `gosdk-http-core`.
 Предназначен для быстрого старта новых сервисов с единой архитектурой, DI, модулями и HTTP kernel.
 
 Шаблон подходит для production-сервисов и внутренних микросервисов.
@@ -13,6 +14,7 @@
  - [Документация GOSDK-DB-CORE](https://github.com/exgamer/gosdk-db-core)
  - [Документация GOSDK-POSTGRES-CORE](https://github.com/exgamer/gosdk-postgres-core)
  - [Документация GOSDK-HTTP-REQUEST-BUILDER](https://github.com/exgamer/gosdk-http-request-builder)
+ - [Документация GOSDK-REDIS-CORE](https://github.com/exgamer/gosdk-redis-core)
 --- 
 
 ## 🚀 Что даёт шаблон
