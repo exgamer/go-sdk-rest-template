@@ -5,10 +5,10 @@ go 1.25.5
 require (
 	github.com/ThreeDotsLabs/watermill v1.5.1
 	github.com/exgamer/gosdk-core v1.0.20
-	github.com/exgamer/gosdk-db-core v1.0.12
+	github.com/exgamer/gosdk-db-core v1.0.13
 	github.com/exgamer/gosdk-http-core v1.0.22
 	github.com/exgamer/gosdk-http-request-builder v1.0.12
-	github.com/exgamer/gosdk-postgres-core v1.0.12
+	github.com/exgamer/gosdk-postgres-core v1.0.14
 	github.com/exgamer/gosdk-rabbit-core v1.0.2
 	github.com/gin-gonic/gin v1.12.0
 	github.com/swaggo/swag v1.16.6
