@@ -4,12 +4,12 @@ go 1.25.5
 
 require (
 	github.com/ThreeDotsLabs/watermill v1.5.1
-	github.com/exgamer/gosdk-core v1.0.20
-	github.com/exgamer/gosdk-db-core v1.0.13
-	github.com/exgamer/gosdk-http-core v1.0.22
-	github.com/exgamer/gosdk-http-request-builder v1.0.12
-	github.com/exgamer/gosdk-postgres-core v1.0.14
-	github.com/exgamer/gosdk-rabbit-core v1.0.2
+	github.com/exgamer/gosdk-core v1.0.23
+	github.com/exgamer/gosdk-db-core v1.0.15
+	github.com/exgamer/gosdk-http-core v1.0.23
+	github.com/exgamer/gosdk-http-request-builder v1.0.14
+	github.com/exgamer/gosdk-postgres-core v1.0.16
+	github.com/exgamer/gosdk-rabbit-core v1.0.4
 	github.com/gin-gonic/gin v1.12.0
 	github.com/swaggo/swag v1.16.6
 	gorm.io/gorm v1.31.1
@@ -49,7 +49,7 @@ require (
 	github.com/goccy/go-yaml v1.19.2 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/gookit/filter v1.2.3 // indirect
-	github.com/gookit/goutil v0.7.3 // indirect
+	github.com/gookit/goutil v0.7.4 // indirect
 	github.com/gookit/validate v1.5.6 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
@@ -97,13 +97,13 @@ require (
 	go.yaml.in/yaml/v2 v2.4.4 // indirect
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
 	golang.org/x/arch v0.25.0 // indirect
-	golang.org/x/crypto v0.48.0 // indirect
-	golang.org/x/mod v0.33.0 // indirect
-	golang.org/x/net v0.51.0 // indirect
+	golang.org/x/crypto v0.49.0 // indirect
+	golang.org/x/mod v0.34.0 // indirect
+	golang.org/x/net v0.52.0 // indirect
 	golang.org/x/sync v0.20.0 // indirect
 	golang.org/x/sys v0.42.0 // indirect
-	golang.org/x/text v0.34.0 // indirect
-	golang.org/x/tools v0.42.0 // indirect
+	golang.org/x/text v0.35.0 // indirect
+	golang.org/x/tools v0.43.0 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
 	gorm.io/driver/postgres v1.6.0 // indirect
 )
