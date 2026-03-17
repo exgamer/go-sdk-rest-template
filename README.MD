@@ -113,6 +113,8 @@ go run main.go
 
 - [Пример работы с запросами](internal/infrastructure/postgres/handbook/city/repository.go)
 
+- [Пример работы с кешем (REDIS)](internal/infrastructure/redis/handbbok/city/repository.go)
+
 - [Пример сервиса](internal/domains/handbook/city/service.go)
 
 - [Пример контроллера](internal/transport/admin/http/handbook/city/handler.go)

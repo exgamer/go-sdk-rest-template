@@ -10,7 +10,9 @@ require (
 	github.com/exgamer/gosdk-http-request-builder v1.0.14
 	github.com/exgamer/gosdk-postgres-core v1.0.16
 	github.com/exgamer/gosdk-rabbit-core v1.0.4
+	github.com/exgamer/gosdk-redis-core v1.0.9
 	github.com/gin-gonic/gin v1.12.0
+	github.com/redis/go-redis/v9 v9.18.0
 	github.com/swaggo/swag v1.16.6
 	gorm.io/gorm v1.31.1
 )
@@ -25,6 +27,7 @@ require (
 	github.com/cenkalti/backoff/v3 v3.2.2 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/cloudwego/base64x v0.1.6 // indirect
+	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.13 // indirect
 	github.com/getsentry/sentry-go v0.43.0 // indirect
@@ -94,6 +97,7 @@ require (
 	github.com/vearne/gin-timeout v0.2.3 // indirect
 	github.com/zsais/go-gin-prometheus v1.0.3 // indirect
 	go.mongodb.org/mongo-driver/v2 v2.5.0 // indirect
+	go.uber.org/atomic v1.11.0 // indirect
 	go.yaml.in/yaml/v2 v2.4.4 // indirect
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
 	golang.org/x/arch v0.25.0 // indirect
