@@ -15,6 +15,7 @@
  - [Документация GOSDK-POSTGRES-CORE](https://github.com/exgamer/gosdk-postgres-core)
  - [Документация GOSDK-HTTP-REQUEST-BUILDER](https://github.com/exgamer/gosdk-http-request-builder)
  - [Документация GOSDK-REDIS-CORE](https://github.com/exgamer/gosdk-redis-core)
+ - [Документация CSVX - парсер CSV](https://github.com/exgamer/csv-parser)
 --- 
 
 ## 🚀 Что даёт шаблон
