@@ -1,6 +1,7 @@
 package main
 
 import (
+	_ "github.com/exgamer/go-sdk-rest-template/docs"
 	"github.com/exgamer/go-sdk-rest-template/internal/app"
 	"log"
 )

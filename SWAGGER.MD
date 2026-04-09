@@ -1,6 +1,7 @@
 ## SWAGGER
 
 - [Описать swaggerdoc в main](main.go)
+- Импортировать в main.go	_ "file-uploader-service/docs"
 - [Пример описания swaggerdoc в контроллере](internal/domains/handbook/modules/city/http/city/v1/handlers/city_handler.go)
 - [Пример структуры для корректного отображения респонза ](internal/domains/handbook/modules/city/http/city/v1/responses/city_item_response.go)
 
