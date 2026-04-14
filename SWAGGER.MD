@@ -16,6 +16,6 @@ swag init -g main.go -o docs --parseDependency --parseInternal --parseDepth 1
 
 Документация сваггера будет доступна по следующим эндпойнтам
 
-http://localhost:8091/rest-template/api-docs/index.html
+http://0.0.0.0:8090/rest-template/api-docs/index.html
 
-http://localhost:8091/rest-template/api-docs/doc.json
+http://0.0.0.0:8090/rest-template/api-docs/doc.json
