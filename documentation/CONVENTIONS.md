@@ -70,10 +70,10 @@ Infrastructure → Transport ✗
 | Infrastructure Postgres | `internal/infrastructure/postgres/{domain}/{module}/` |
 | Infrastructure Redis | `internal/infrastructure/redis/{domain}/{module}/` |
 | Infrastructure HTTP | `internal/infrastructure/http/{domain}/{module}/` |
-| Bootstrap | `internal/app/bootstrap/{module}/` |
+| Bootstrap | `internal/app/bootstrap/{module}/` или `internal/app/bootstrap/{domain}/{module}/` |
 
-> Bootstrap — только уровень модуля, без домена.
-> Пример: `domains/handbook/city/`, `bootstrap/city/`.
+> Bootstrap — по умолчанию только уровень модуля. Домен добавляется если в нём несколько модулей и нужна группировка.
+> Примеры: `bootstrap/city/`, `bootstrap/handbook/city/`.
 
 ---
 

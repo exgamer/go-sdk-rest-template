@@ -163,7 +163,8 @@ internal/
 ├── app/
 │   ├── app.go                              ← инициализация App, регистрация Kernels и Modules
 │   └── bootstrap/
-│       └── {module}/                       ← например: city, product, invoice
+│       └── {module}/                       ← например: city, product (без домена)
+│       └── {domain}/{module}/              ← например: handbook/city (с доменом, если нужна группировка)
 │           ├── module.go                   ← точка входа модуля
 │           ├── repositories_factory.go     ← создание репозиториев
 │           ├── services_factory.go         ← создание сервисов
@@ -219,9 +220,9 @@ internal/
 ```
 
 **Ключевые правила структуры:**
-- `bootstrap/{module}/` — только уровень модуля, без домена
-- Все остальные слои: `{domain}/{module}/`
-- Реальный пример: `domains/handbook/city/`, `transport/admin/http/handbook/city/`
+- `bootstrap/` — по умолчанию `{module}/`; домен добавляется если нужна группировка: `{domain}/{module}/`
+- Все остальные слои всегда: `{domain}/{module}/`
+- Примеры: `bootstrap/city/` или `bootstrap/handbook/city/`, `domains/handbook/city/`, `transport/admin/http/handbook/city/`
 
 ---
 
