@@ -1,43 +1,22 @@
 # go-sdk-rest-template
 
-`go-sdk-rest-template` — шаблон REST-сервиса на Go, построенный поверх `gosdk-core`, 
-`gosdk-db-core`, `gosdk-postgres-core`, `gosdk-http-request-builder`,  `gosdk-redis-core` и `gosdk-http-core`.
-Предназначен для быстрого старта новых сервисов с единой архитектурой, DI, модулями и HTTP kernel.
-
-Шаблон подходит для production-сервисов и внутренних микросервисов.
-
----
-## Для более детализированной информации ознакомьтесь в документацей к следующим пакетам 
-
- - [Документация GOSDK-CORE](https://github.com/exgamer/gosdk-core)
- - [Документация GOSDK-HTTP-CORE](https://github.com/exgamer/gosdk-http-core)
- - [Документация GOSDK-DB-CORE](https://github.com/exgamer/gosdk-db-core)
- - [Документация GOSDK-POSTGRES-CORE](https://github.com/exgamer/gosdk-postgres-core)
- - [Документация GOSDK-HTTP-REQUEST-BUILDER](https://github.com/exgamer/gosdk-http-request-builder)
- - [Документация GOSDK-REDIS-CORE](https://github.com/exgamer/gosdk-redis-core)
- - [Документация CSVX - парсер CSV](https://github.com/exgamer/csv-parser)
---- 
-
-## 🚀 Что даёт шаблон
-
-- 🧠 Единый `App` lifecycle
-- 🌐 Готовый HTTP kernel (Gin)
-- 🧩 Dependency Injection из коробки
-- 🧱 Модульная архитектура (business modules)
-- ⚙️ Конфигурация через env
-- ♻️ Graceful shutdown
-- ❗ Стандартизированная обработка ошибок
-- 🧪 Удобная база для тестирования
+Шаблон REST-сервиса на Go, построенный поверх Go SDK. Предназначен для быстрого старта новых сервисов с единой архитектурой, DI, модулями и HTTP kernel.
 
 ---
 
-## 📁 Структура проекта
+## Документация
 
-[Структура проекта](STRUCTURE.md)
+| Файл | Содержание |
+|---|---|
+| [ARCHITECTURE.md](documentation/ARCHITECTURE.md) | Архитектура, слои, структура проекта, жизненный цикл App |
+| [NEW_DOMAIN_GUIDE.md](documentation/NEW_DOMAIN_GUIDE.md) | Пошаговое создание нового модуля с полными примерами кода |
+| [SDK_REFERENCE.md](documentation/SDK_REFERENCE.md) | Справочник: DI, response, ошибки, валидация, пагинация, Redis, RabbitMQ, HTTP client, debug, middleware, конфиг |
+| [CONVENTIONS.md](documentation/CONVENTIONS.md) | Правила, соглашения по именованию, checklist нового модуля |
+| [SWAGGER.MD](documentation/SWAGGER.MD) | Настройка и генерация Swagger документации |
 
 ---
 
-## ▶️ Запуск сервиса
+## Быстрый старт
 
 ### 1. Установка зависимостей
 
@@ -45,19 +24,19 @@
 go mod tidy
 ```
 
-### 2. Настройка env
+### 2. Настройка `.env`
+
+Скопируйте `.env.example` в `.env` и заполните значения:
 
 ```env
 APP_NAME=rest-template
 APP_ENV=local
 APP_VERSION=1.0
-TIMEZONE=
 LOG_LEVEL=DEBUG
 
 SERVER_ADDRESS=0.0.0.0:8090
 SWAGGER_PREFIX=rest-template
 HANDLER_TIMEOUT=30
-SENTRY_DSN=
 
 POSTGRES_DB_HOST=localhost
 POSTGRES_DB_USER=admin
@@ -66,7 +45,7 @@ POSTGRES_DB_NAME=test
 POSTGRES_DB_PORT=5432
 POSTGRES_DB_MAX_OPEN_CONNECTIONS=100
 POSTGRES_DB_MAX_IDLE_CONNECTIONS=10
-POSTGRES_DB_LOG_LEVEL=info    // вывод логов SQL  запросов "info", "errors",  "warnings", если логи не нужны не указывать
+POSTGRES_DB_LOG_LEVEL=info
 ```
 
 ### 3. Запуск
@@ -75,150 +54,3 @@ POSTGRES_DB_LOG_LEVEL=info    // вывод логов SQL  запросов "in
 go run main.go
 ```
 
----
-
-## 🧠 Архитектура
-
-### App
-
-`App` создаётся в `internal/app` и:
-- инициализирует config
-- создаёт DI контейнер
-- регистрирует kernels
-- запускает бизнес-модули
-
-### Пример App
-
-- [Пример приложения](internal/app/app.go)
-
-### HTTP Kernel
-
-- поднимает Gin server
-- регистрирует router в DI
-- управляет жизненным циклом HTTP
-- [Документация GOSDK-HTTP-CORE](https://github.com/exgamer/gosdk-http-core)
-
-### POSTGRES Kernel
-
-- Инициализирует соединение POSTGRES
-- [Документация GOSDK-POSTGRES-CORE](https://github.com/exgamer/gosdk-postgres-core)
-
----
-
-## 🧱 Бизнес-модули
-
-Каждый модуль:
-- имеет статическое имя
-- регистрирует свои зависимости
-- добавляет HTTP-роуты
-
-- [Пример работы с запросами](internal/infrastructure/postgres/handbook/city/repository.go)
-
-- [Пример работы с кешем (REDIS)](internal/infrastructure/redis/handbbok/city/repository.go)
-
-- [Пример сервиса](internal/domains/handbook/city/service.go)
-
-- [Пример контроллера](internal/transport/admin/http/handbook/city/handler.go)
-
-- [Пример бизнес модуля](internal/app/bootstrap/city/module.go)
-
-- [Пример роутов модуля](internal/transport/admin/http/handbook/city/routes.go)
-
----
-### Режим отладки
-
-- [Работа с Debug Collector](https://github.com/exgamer/gosdk-core/blob/main/pkg/debug/README.MD)
-
-- [Логирование ](https://github.com/exgamer/gosdk-core/blob/main/pkg/logger/README.md)
-
-- [Отладочная информация в ответе от API ](https://github.com/exgamer/gosdk-http-core/blob/main/DEBUG_MODE.MD)
-
-
----
-### HTTP запросы
-
-Для HTTP запросов используется пакет `gosdk-http-request-builder` (документацию смотри в README пакета)
-- [Пример работы с HTTP запросами](internal/infrastructure/httpclient/handbook/city/repository.go)
-
----
-
-### SWAGGER
-
-- [Работа со SWAGGER](SWAGGER.MD)
-
----
-
-## 🧩 Dependency Injection
-
-Регистрация сервисов:
-
-```go
-di.Register(app.Container, &UserService{})
-```
-
-Использование:
-
-```go
-c, err := di.Resolve[*config.HttpConfig](a.Container)
-
-if err != nil {
-    return nil, err
-}
-```
-
----
-
-## ❗ Ошибки
-
-Используется единая модель ошибок из `gosdk-core` и `gosdk-http-core`:
-
-HTTP kernel автоматически мапит ошибки в HTTP-ответы.
-
-- [Обычные исключения](https://github.com/exgamer/gosdk-core/blob/main/pkg/exception/README.MD)
-- [HTTP исключения](https://github.com/exgamer/gosdk-http-core/blob/main/pkg/exception/README.md)
-
----
-
-## Логирование
-
-- [Пример работы с логами](https://github.com/exgamer/gosdk-core/blob/v1.0.2/pkg/logger/README.md)
-
-- [Пример работы с логами HTTP](https://github.com/exgamer/gosdk-http-core/blob/main/pkg/logger/README.md)
-
----
-
-## ♻️ Graceful Shutdown 
-
-Приложение корректно:
-- ловит SIGTERM / SIGINT
-- завершает HTTP сервер
-- даёт время на завершение активных запросов
-
----
-
-## 🧪 Рекомендации
-
-- ✅ один бизнес-контекст = один модуль
-- ✅ регистрировать роуты только в модулях
-- ❌ не использовать глобальные переменные
-- ❌ не создавать HTTP server вручную
-- ✅ использовать DI для сервисов и репозиториев
-
----
-
-## 📌 Используемые библиотеки
-
-- `gosdk-core`
-- `gosdk-http-core`
-- `gosdk-db-core`
-- `gosdk-postgres-core`
-- `gosdk-http-request-builder`
-- Gin
-- Gorm
-- Go 1.21+
-
----
-
-## 📝 License
-
-MIT или внутренняя лицензия компании
