@@ -2,7 +2,7 @@ package city
 
 import (
 	cityadmin "github.com/exgamer/go-sdk-rest-template/internal/transport/admin/http/handbook/city"
-	cityconsumer "github.com/exgamer/go-sdk-rest-template/internal/transport/consumer/handbbok/city"
+	cityconsumer "github.com/exgamer/go-sdk-rest-template/internal/transport/base/rabbit/handbbok/city"
 	"github.com/exgamer/gosdk-core/pkg/app"
 	"github.com/exgamer/gosdk-postgres-core/pkg/di"
 	rDi "github.com/exgamer/gosdk-rabbit-core/pkg/di"

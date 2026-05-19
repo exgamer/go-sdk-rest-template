@@ -194,11 +194,12 @@ internal/
 │   │               ├── request.go          ← Request DTOs
 │   │               ├── response.go         ← Response DTOs
 │   │               └── mapper.go           ← DTO ↔ Domain маппинг
-│   └── consumer/
-│       └── {domain}/                       ← например: handbook
-│           └── {module}/                   ← например: city
-│               ├── consumer_registry.go    ← регистрация consumers
-│               └── {module}_consumer.go    ← логика обработки сообщений
+│   └── base/
+│       └── rabbit/
+│           └── {domain}/                       ← например: handbook
+│               └── {module}/                   ← например: city
+│                  ├── consumer_registry.go    ← регистрация consumers
+│                  └── {module}_consumer.go    ← логика обработки сообщений
 │
 └── infrastructure/
     ├── postgres/

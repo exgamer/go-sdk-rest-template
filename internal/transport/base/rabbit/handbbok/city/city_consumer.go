@@ -3,6 +3,7 @@ package city
 import (
 	"context"
 	"fmt"
+
 	"github.com/ThreeDotsLabs/watermill/message"
 )
 
