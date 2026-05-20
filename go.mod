@@ -6,7 +6,7 @@ require (
 	github.com/ThreeDotsLabs/watermill v1.5.1
 	github.com/exgamer/gosdk-core v1.0.23
 	github.com/exgamer/gosdk-db-core v1.0.15
-	github.com/exgamer/gosdk-http-core v1.0.25
+	github.com/exgamer/gosdk-http-core v1.0.26
 	github.com/exgamer/gosdk-http-request-builder v1.0.14
 	github.com/exgamer/gosdk-postgres-core v1.0.16
 	github.com/exgamer/gosdk-rabbit-core v1.0.4
