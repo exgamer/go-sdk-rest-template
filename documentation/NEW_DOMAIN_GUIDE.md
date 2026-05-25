@@ -2,7 +2,7 @@
 
 Пример: модуль `product` в домене `catalog`.
 
-Пути: `domains/catalog/product/`, `transport/.../catalog/product/`, `infrastructure/.../catalog/product/`, `bootstrap/product/`.
+Пути: `domains/catalog/product/`, `entrypoint/.../catalog/product/`, `infrastructure/.../catalog/product/`, `bootstrap/product/`.
 
 ## Содержание
 
@@ -10,8 +10,8 @@
 2. [Infrastructure — Postgres](#2-infrastructure--postgres)
 3. [Infrastructure — Redis](#3-infrastructure--redis)
 4. [Infrastructure — HTTP Client](#4-infrastructure--http-client)
-5. [Transport — HTTP Handler](#5-transport--http-handler)
-6. [Transport — RabbitMQ Consumer](#6-transport--rabbitmq-consumer)
+5. [Entrypoint — HTTP Handler](#5-entrypoint--http-handler)
+6. [Entrypoint — RabbitMQ Consumer](#6-entrypoint--rabbitmq-consumer)
 7. [Bootstrap — Module](#7-bootstrap--module)
 8. [Регистрация в App](#8-регистрация-в-app)
 
@@ -442,9 +442,9 @@ func (r *HttpRepository) GetById(ctx context.Context, id uint) (*domain.Product,
 
 ---
 
-## 5. Transport — HTTP Handler
+## 5. Entrypoint — HTTP Handler
 
-**`internal/transport/admin/http/catalog/product/request.go`**
+**`internal/entrypoint/admin/http/catalog/product/request.go`**
 
 ```go
 package product
@@ -477,7 +477,7 @@ type updateRequest struct {
 
 ---
 
-**`internal/transport/admin/http/catalog/product/response.go`**
+**`internal/entrypoint/admin/http/catalog/product/response.go`**
 
 ```go
 package product
@@ -511,7 +511,7 @@ type paginatedResponse struct {
 
 ---
 
-**`internal/transport/admin/http/catalog/product/mapper.go`**
+**`internal/entrypoint/admin/http/catalog/product/mapper.go`**
 
 ```go
 package product
@@ -573,7 +573,7 @@ func paginatedDataFromResult(p *pagination.Paginated[domain.Product]) *paginated
 
 ---
 
-**`internal/transport/admin/http/catalog/product/handler.go`**
+**`internal/entrypoint/admin/http/catalog/product/handler.go`**
 
 ```go
 package product
@@ -695,7 +695,7 @@ func (h *Handler) Delete() gin.HandlerFunc {
 
 ---
 
-**`internal/transport/admin/http/catalog/product/routes.go`**
+**`internal/entrypoint/admin/http/catalog/product/routes.go`**
 
 ```go
 package product
@@ -738,9 +738,9 @@ func SetRoutes(a *app.App, handler *Handler) error {
 
 ---
 
-## 6. Transport — RabbitMQ Consumer
+## 6. Entrypoint — RabbitMQ Consumer
 
-**`internal/transport/consumer/catalog/product/product_consumer.go`**
+**`internal/entrypoint/consumer/catalog/product/product_consumer.go`**
 
 ```go
 package product
@@ -778,7 +778,7 @@ func (c *Consumer) Consume(ctx context.Context, msg *message.Message) error {
 
 ---
 
-**`internal/transport/consumer/catalog/product/consumer_registry.go`**
+**`internal/entrypoint/consumer/catalog/product/consumer_registry.go`**
 
 ```go
 package product
@@ -853,15 +853,15 @@ func newServicesFactory(repos *repositoriesFactory) *servicesFactory {
 ```go
 package product
 
-import transport "github.com/exgamer/go-sdk-rest-template/internal/transport/admin/http/catalog/product"
+import entrypoint "github.com/exgamer/go-sdk-rest-template/internal/entrypoint/admin/http/catalog/product"
 
 type handlersFactory struct {
-    ProductHandler *transport.Handler
+    ProductHandler *entrypoint.Handler
 }
 
 func newHandlersFactory(services *servicesFactory) *handlersFactory {
     return &handlersFactory{
-        ProductHandler: transport.NewHandler(services.ProductService),
+        ProductHandler: entrypoint.NewHandler(services.ProductService),
     }
 }
 ```
@@ -873,7 +873,7 @@ func newHandlersFactory(services *servicesFactory) *handlersFactory {
 ```go
 package product
 
-import consumer "github.com/exgamer/go-sdk-rest-template/internal/transport/consumer/catalog/product"
+import consumer "github.com/exgamer/go-sdk-rest-template/internal/entrypoint/consumer/catalog/product"
 
 type consumersFactory struct {
     ProductConsumer *consumer.Consumer
@@ -897,8 +897,8 @@ import (
     "github.com/exgamer/gosdk-core/pkg/app"
     postgresDi "github.com/exgamer/gosdk-postgres-core/pkg/di"
     rabbitDi   "github.com/exgamer/gosdk-rabbit-core/pkg/di"
-    transport  "github.com/exgamer/go-sdk-rest-template/internal/transport/admin/http/catalog/product"
-    consumer   "github.com/exgamer/go-sdk-rest-template/internal/transport/consumer/catalog/product"
+    entrypoint "github.com/exgamer/go-sdk-rest-template/internal/entrypoint/admin/http/catalog/product"
+    consumer   "github.com/exgamer/go-sdk-rest-template/internal/entrypoint/consumer/catalog/product"
 )
 
 type Module struct{}
@@ -917,7 +917,7 @@ func (m *Module) Init(a *app.App) error {
     svcFactory := newServicesFactory(repoFactory)
     hdlFactory := newHandlersFactory(svcFactory)
 
-    if err = transport.SetRoutes(a, hdlFactory.ProductHandler); err != nil {
+    if err = entrypoint.SetRoutes(a, hdlFactory.ProductHandler); err != nil {
         return err
     }
 

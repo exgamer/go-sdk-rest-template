@@ -19,17 +19,17 @@
 5. **Request DTO** — обязательно эмбедить `validation.Request`
 6. **Response DTO** — обязательно эмбедить `structures.Response[T]`
 7. **HTTP ответы** — только через `response.*` функции, никаких `c.JSON(...)` напрямую
-8. **Ошибки** — только пробрасываются вверх; HTTP ответы пишет только transport слой
+8. **Ошибки** — только пробрасываются вверх; HTTP ответы пишет только entrypoint слой
 
 ---
 
 ## Запрещённые зависимости
 
 ```
-Domain → Infrastructure    ✗
-Domain → Transport         ✗
-Transport → Bootstrap      ✗
-Infrastructure → Transport ✗
+Domain → Infrastructure      ✗
+Domain → Entrypoint         ✗
+Entrypoint → Bootstrap      ✗
+Infrastructure → Entrypoint ✗
 ```
 
 ---
@@ -45,13 +45,13 @@ Infrastructure → Transport ✗
 | Infrastructure | GORM модель | `model.go` |
 | Infrastructure | Реализация репозитория | `repository.go` |
 | Infrastructure | Маппинг | `mapper.go` |
-| Transport | Gin handler | `handler.go` |
-| Transport | Регистрация маршрутов | `routes.go` |
-| Transport | Request DTOs | `request.go` |
-| Transport | Response DTOs | `response.go` |
-| Transport | Маппинг DTO ↔ Domain | `mapper.go` |
-| Transport | Consumer | `{module}_consumer.go` |
-| Transport | Регистрация consumers | `consumer_registry.go` |
+| Entrypoint | Gin handler | `handler.go` |
+| Entrypoint | Регистрация маршрутов | `routes.go` |
+| Entrypoint | Request DTOs | `request.go` |
+| Entrypoint | Response DTOs | `response.go` |
+| Entrypoint | Маппинг DTO ↔ Domain | `mapper.go` |
+| Entrypoint | Consumer | `{module}_consumer.go` |
+| Entrypoint | Регистрация consumers | `consumer_registry.go` |
 | Bootstrap | Точка входа модуля | `module.go` |
 | Bootstrap | Фабрика | `{type}_factory.go` |
 | Workflow | Оркестратор | `workflow.go` |
@@ -65,8 +65,8 @@ Infrastructure → Transport ✗
 |---|---|
 | Domain | `internal/domains/{domain}/{module}/` |
 | Workflow | `internal/workflow/{name}/` |
-| Transport HTTP | `internal/transport/admin/http/{domain}/{module}/` |
-| Transport Consumer | `internal/transport/consumer/{domain}/{module}/` |
+| Entrypoint HTTP | `internal/entrypoint/admin/http/{domain}/{module}/` |
+| Entrypoint Consumer | `internal/entrypoint/consumer/{domain}/{module}/` |
 | Infrastructure Postgres | `internal/infrastructure/postgres/{domain}/{module}/` |
 | Infrastructure Redis | `internal/infrastructure/redis/{domain}/{module}/` |
 | Infrastructure HTTP | `internal/infrastructure/http/{domain}/{module}/` |
@@ -99,11 +99,11 @@ handbook:city:list
 - [ ] `infrastructure/postgres/{domain}/{module}/model.go`
 - [ ] `infrastructure/postgres/{domain}/{module}/repository.go`
 - [ ] `infrastructure/postgres/{domain}/{module}/mapper.go`
-- [ ] `transport/admin/http/{domain}/{module}/handler.go`
-- [ ] `transport/admin/http/{domain}/{module}/routes.go`
-- [ ] `transport/admin/http/{domain}/{module}/request.go`
-- [ ] `transport/admin/http/{domain}/{module}/response.go`
-- [ ] `transport/admin/http/{domain}/{module}/mapper.go`
+- [ ] `entrypoint/admin/http/{domain}/{module}/handler.go`
+- [ ] `entrypoint/admin/http/{domain}/{module}/routes.go`
+- [ ] `entrypoint/admin/http/{domain}/{module}/request.go`
+- [ ] `entrypoint/admin/http/{domain}/{module}/response.go`
+- [ ] `entrypoint/admin/http/{domain}/{module}/mapper.go`
 - [ ] `app/bootstrap/{module}/repositories_factory.go`
 - [ ] `app/bootstrap/{module}/services_factory.go`
 - [ ] `app/bootstrap/{module}/handlers_factory.go`
@@ -115,8 +115,8 @@ handbook:city:list
 - [ ] `infrastructure/http/{domain}/{module}/model.go`
 - [ ] `infrastructure/http/{domain}/{module}/repository.go`
 - [ ] `infrastructure/http/{domain}/{module}/mapper.go`
-- [ ] `transport/consumer/{domain}/{module}/{module}_consumer.go`
-- [ ] `transport/consumer/{domain}/{module}/consumer_registry.go`
+- [ ] `entrypoint/consumer/{domain}/{module}/{module}_consumer.go`
+- [ ] `entrypoint/consumer/{domain}/{module}/consumer_registry.go`
 - [ ] `app/bootstrap/{module}/consumers_factory.go`
 
 **Cross-domain (Workflow):**

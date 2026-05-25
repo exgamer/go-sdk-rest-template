@@ -19,7 +19,7 @@
 ┌─────────────────────────────────────────┐
 │         Application / Bootstrap         │  ← собирает всё вместе
 ├─────────────────────────────────────────┤
-│              Transport Layer            │  ← HTTP handlers, consumers
+│             Entrypoint Layer            │  ← HTTP handlers, consumers
 ├─────────────────────────────────────────┤
 │            Workflow Layer (*)           │  ← cross-domain оркестрация
 ├─────────────────────────────────────────┤
@@ -34,10 +34,10 @@
 **Направление зависимостей:**
 
 ```
-Transport      ──→  Workflow / Domain
+Entrypoint     ──→  Workflow / Domain
 Workflow       ──→  Domain
 Infrastructure ──→  Domain
-Bootstrap      ──→  Transport + Workflow + Infrastructure + Domain
+Bootstrap      ──→  Entrypoint + Workflow + Infrastructure + Domain
 ```
 
 Domain не знает ни про базу данных, ни про HTTP — только про бизнес-правила.
@@ -45,12 +45,12 @@ Domain не знает ни про базу данных, ни про HTTP — �
 **Запрещённые зависимости:**
 
 ```
-Domain     → Infrastructure    ✗
-Domain     → Transport         ✗
-Domain     → Workflow          ✗
-Workflow   → Transport         ✗
-Transport  → Bootstrap         ✗
-Infrastructure → Transport     ✗
+Domain     → Infrastructure      ✗
+Domain     → Entrypoint         ✗
+Domain     → Workflow           ✗
+Workflow   → Entrypoint         ✗
+Entrypoint → Bootstrap          ✗
+Infrastructure → Entrypoint     ✗
 ```
 
 ---
@@ -96,7 +96,7 @@ Infrastructure → Transport     ✗
 
 Infrastructure зависит от Domain, но Domain не знает про Infrastructure.
 
-### Transport Layer
+### Entrypoint Layer
 
 Отвечает за взаимодействие с внешним миром: HTTP, RabbitMQ.
 
@@ -127,7 +127,7 @@ Handler:
 
 ```
 Цепочка зависимостей:
-  DB Client → Repository (infra) → Service (domain) → Handler (transport) → Routes
+  DB Client → Repository (infra) → Service (domain) → Handler (entrypoint) → Routes
 ```
 
 ---
@@ -184,7 +184,7 @@ internal/
 │       ├── workflow.go                     ← оркестрирует несколько доменных сервисов
 │       └── dto.go                          ← входные/выходные данные workflow
 │
-├── transport/
+├── entrypoint/
 │   ├── admin/
 │   │   └── http/
 │   │       └── {domain}/                   ← например: handbook
@@ -223,7 +223,7 @@ internal/
 **Ключевые правила структуры:**
 - `bootstrap/` — по умолчанию `{module}/`; домен добавляется если нужна группировка: `{domain}/{module}/`
 - Все остальные слои всегда: `{domain}/{module}/`
-- Примеры: `bootstrap/city/` или `bootstrap/handbook/city/`, `domains/handbook/city/`, `transport/admin/http/handbook/city/`
+- Примеры: `bootstrap/city/` или `bootstrap/handbook/city/`, `domains/handbook/city/`, `entrypoint/admin/http/handbook/city/`
 
 ---
 
