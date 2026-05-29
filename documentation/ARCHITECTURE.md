@@ -19,7 +19,7 @@
 ┌─────────────────────────────────────────┐
 │         Application / Bootstrap         │  ← собирает всё вместе
 ├─────────────────────────────────────────┤
-│             Entrypoint Layer            │  ← HTTP handlers, consumers
+│             Entrypoint Layer            │  ← Точки входа в приложение, HTTP/GRPC handlers, consumers
 ├─────────────────────────────────────────┤
 │            Workflow Layer (*)           │  ← cross-domain оркестрация
 ├─────────────────────────────────────────┤
