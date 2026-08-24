@@ -2,7 +2,6 @@ package app
 
 import (
 	"github.com/exgamer/go-sdk-rest-template/internal/app/bootstrap/city"
-	"github.com/exgamer/go-sdk-rest-template/internal/migrations"
 	"github.com/exgamer/gosdk-core/pkg/app"
 	http "github.com/exgamer/gosdk-http-core/pkg/app"
 	postgres "github.com/exgamer/gosdk-postgres-core/pkg/app"
@@ -19,7 +18,7 @@ func NewApp() (*App, error) {
 	}
 
 	err := appInstance.RegisterAndInitKernels(
-		(&postgres.PostgresKernel{}).WithMigrations(migrations.All()...),
+		&postgres.PostgresKernel{},
 		&http.HttpKernel{},
 		rabbitapp.NewRabbitKernel().EnableConsumer().EnablePublisher(), // просто для примера работы с несколькими ядрами которые запускаются
 	)

@@ -4,15 +4,17 @@ go 1.25.5
 
 require (
 	github.com/ThreeDotsLabs/watermill v1.5.2
+	github.com/exgamer/gosdk-console-core v0.0.1
 	github.com/exgamer/gosdk-core v1.0.23
-	github.com/exgamer/gosdk-db-core v1.0.17
+	github.com/exgamer/gosdk-db-core v1.0.18
 	github.com/exgamer/gosdk-http-core v1.0.29
 	github.com/exgamer/gosdk-http-request-builder v1.0.14
-	github.com/exgamer/gosdk-postgres-core v1.0.18
+	github.com/exgamer/gosdk-postgres-core v1.0.19
 	github.com/exgamer/gosdk-rabbit-core v1.0.6
 	github.com/exgamer/gosdk-redis-core v1.0.9
 	github.com/gin-gonic/gin v1.12.0
 	github.com/redis/go-redis/v9 v9.22.0
+	github.com/spf13/cobra v1.10.2
 	github.com/swaggo/swag v1.16.6
 	gorm.io/gorm v1.31.2
 )
@@ -57,6 +59,7 @@ require (
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/iancoleman/strcase v0.3.0 // indirect
+	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761 // indirect
 	github.com/jackc/pgx/v5 v5.10.0 // indirect

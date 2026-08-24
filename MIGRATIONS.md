@@ -2,16 +2,20 @@
 
 Пошаговая инструкция, как в этом шаблоне создавать, заполнять и прогонять
 миграции схемы БД. Механизм — версионированные миграции через
-[gormigrate](https://github.com/go-gormigrate/gormigrate), прогоняются
-`PostgresKernel` при старте приложения, до того как остальные kernels
-(HTTP, Rabbit) начнут работать.
+[gormigrate](https://github.com/go-gormigrate/gormigrate). Прогон и откат —
+всегда ручная операция через консоль проекта (`cmd/console migrate ...`),
+**не** часть старта сервиса: `PostgresKernel`, который поднимает основное
+приложение (`internal/app/app.go`), про миграции ничего не знает — он только
+открывает соединение с БД. За накат/откат отвечает отдельный тип
+`Migrator` (`gosdk-postgres-core/pkg/app/migrator.go`), не связанный с
+Init/DI-жизненным циклом кернела.
 
 ## Содержание
 
 1. [Как это устроено](#1-как-это-устроено)
 2. [Шаг 1 — сгенерировать миграцию](#шаг-1--сгенерировать-миграцию)
 3. [Шаг 2 — заполнить тело миграции](#шаг-2--заполнить-тело-миграции)
-4. [Шаг 3 — подключить в app.go](#шаг-3--подключить-в-appgo-один-раз-на-проект)
+4. [Шаг 3 — подключить в cmd/console](#шаг-3--подключить-в-cmdconsole-один-раз-на-проект)
 5. [Пример: таблица + сид данных](#пример-таблица--сид-данных)
 6. [Откат (rollback)](#откат-rollback)
 7. [Как проверить, что миграция уже применена](#как-проверить-что-миграция-уже-применена)
@@ -29,15 +33,22 @@
     редактируется.
   - `<timestamp>_<domain>_<module>_<description>.go` — один файл на одну
     миграцию, с двумя функциями: `Migrate` (применить) и `Rollback` (откатить).
-- При старте `PostgresKernel.Init()`:
-  1. открывает соединение с БД;
-  2. берёт Postgres advisory lock (защита от гонки при одновременном старте
-     нескольких инстансов — см. [раздел ниже](#несколько-инстансов-одновременно));
+- `gosdk-postgres-core/pkg/app/migrator.go` — `Migrator`, единственное место,
+  которое реально применяет/откатывает миграции. Соединение сам не
+  открывает и не закрывает — принимает уже готовый `*gorm.DB` в
+  `NewMigrator(db, migrations...)` (осознанно: в проекте может быть
+  несколько Postgres-клиентов, и какой именно передать — решает вызывающий
+  код, `cmd/console/main.go`). `go run ./cmd/console migrate up` (см.
+  [Шаг 3](#шаг-3--подключить-в-cmdconsole-один-раз-на-проект)):
+  1. `cmd/console/main.go` открывает соединение с БД (`database.InitPostgresGormConnection`)
+     и передаёт его в `Migrator`;
+  2. `Migrator` берёт Postgres advisory lock (защита от гонки при
+     параллельном запуске — см. [раздел ниже](#несколько-инстансов-одновременно));
   3. прогоняет ещё не применённые миграции по порядку — какие уже применены,
      хранится в служебной таблице `migrations` в самой БД (см.
      [раздел ниже](#как-проверить-что-миграция-уже-применена));
-  4. снимает лок и только после этого регистрирует соединение в DI —
-     остальные kernels стартуют, когда миграции гарантированно готовы.
+  4. снимает лок; соединение закрывает `cmd/console/main.go` (`defer`) после
+     завершения команды.
 
 ---
 
@@ -105,24 +116,32 @@ func migration20260824050406() *migration.Migration {
 
 ---
 
-## Шаг 3 — подключить в `app.go` (один раз на проект)
+## Шаг 3 — подключить в `cmd/console` (один раз на проект)
 
-В `internal/app/app.go`:
+В `cmd/console/main.go`:
 
 ```go
 import "github.com/exgamer/go-sdk-rest-template/internal/migrations"
 
-appInstance.RegisterAndInitKernels(
-	(&postgres.PostgresKernel{}).WithMigrations(migrations.All()...),
-	&http.HttpKernel{},
-	...
-)
+db, err := openDefaultConnection() // database.InitPostgresDbConfig + InitPostgresGormConnection
+...
+defer closeConnection(db)
+
+migrator := postgres.NewMigrator(db, migrations.All()...)
+
+consoleKernel := console.NewConsoleKernel("console").
+	AddCommand(migrateCmd(migrator))
 ```
 
+Соединение открывается явно в `main.go`, а не внутри `Migrator` — если в
+проекте несколько Postgres-клиентов, для каждого нужен свой `*gorm.DB` и,
+если он мигрирует отдельно, свой `Migrator`.
+
 Дальше это делать не нужно: каждая следующая миграция — это просто шаг 1
-(`codegen migration add ...`) + шаг 2 (заполнить тело). `app.go` трогать
-больше не надо, `migrations.All()` уже подключён и подтягивает новые записи
-сама.
+(`codegen migration add ...`) + шаг 2 (заполнить тело). `cmd/console` трогать
+больше не надо, `migrations.All()` уже подключён к `Migrator` и подтягивает
+новые записи сама. `internal/app/app.go` (основное приложение) миграции
+вообще не касаются — `PostgresKernel` там просто открывает соединение.
 
 ---
 
@@ -157,12 +176,27 @@ Rollback: func(tx *gorm.DB) error {
 
 ## Откат (rollback)
 
-`Rollback` вызывается не автоматически — только через `gormigrate` API,
-если он используется отдельно от `migration.Run` (в этом шаблоне `Run`
-всегда идёт только вперёд, `RollbackLast`/`RollbackTo` не подключены). На
-практике `Rollback` в первую очередь документирует, как обратить миграцию,
-и пригождается при ручном вмешательстве через psql/консоль. Пишите его
-всегда, даже если не будете гонять автоматически.
+`Rollback` не вызывается автоматически — `PostgresKernel`, который стартует
+вместе с сервисом, вообще ничего не знает про миграции (см.
+[Как это устроено](#1-как-это-устроено)). И накат, и откат — только ручная
+команда `migrate` в консоли проекта (`cmd/console`, см.
+[Локальная проверка](#локальная-проверка)):
+
+```bash
+go run ./cmd/console migrate down             # откатить последнюю применённую миграцию
+go run ./cmd/console migrate down-to <id>     # откатить всё после <id> (саму <id> не откатывает)
+```
+
+Обе команды берут тот же Postgres advisory lock, что и обычный накат (см.
+[раздел про несколько инстансов](#несколько-инстансов-одновременно)) — гонка
+между накатом на одном инстансе и ручным откатом на другом исключена.
+`<id>` — значение поля `ID` из файла миграции (то же, что хранится в
+служебной таблице `migrations`, см. ниже).
+
+`down-to` откатывает миграции **в обратном порядке**, одну за другой, вызывая
+`Rollback` каждой — так что пишите `Rollback` всегда, даже если не планируете
+откатывать конкретную миграцию: без него `down`/`down-to` не смогут пройти
+дальше неё.
 
 ---
 
@@ -188,17 +222,20 @@ SELECT * FROM migrations;
 
 ## Несколько инстансов одновременно
 
-При rolling deploy может подняться несколько инстансов сервиса сразу.
-`PostgresKernel` берёт Postgres advisory lock (`pg_advisory_lock`) вокруг
-прогона миграций:
+Раз накат — ручная команда (`console migrate up`), а не часть старта
+сервиса, риск гонки между инстансами при обычном rolling deploy пропадает
+сам собой: сервис при старте миграции не трогает вообще. Advisory lock в
+`Migrator` защищает более узкий случай — если `console migrate up`/`down`
+запустят одновременно вручную из нескольких мест (два CI job'а, два
+оператора и т.д.):
 
-- инстанс, который первым взял лок, применяет ещё не применённые миграции;
-- остальные инстансы ждут на этом же `SELECT pg_advisory_lock(...)`, и после
+- кто первый взял лок — тот и выполняет операцию;
+- остальные ждут на этом же `SELECT pg_advisory_lock(...)` и после
   разблокировки видят уже применённое состояние (по таблице `migrations`) —
-  просто пропускают все миграции без ошибок.
+  накат просто пропускает уже применённые миграции без ошибок.
 
-Никакой отдельной настройки для этого не требуется — включено всегда, как
-только передан непустой список в `WithMigrations(...)`.
+Никакой отдельной настройки для этого не требуется — лок в `Migrator`
+включён всегда.
 
 ---
 
@@ -206,30 +243,19 @@ SELECT * FROM migrations;
 
 Поднять локальный Postgres (см. `.env` / `.env.example` для параметров
 подключения) и прогнать миграции без поднятия всего приложения (в т.ч. без
-Rabbit-kernel) — небольшой отдельный `main.go`:
+HTTP/Rabbit kernels) — через консоль проекта `cmd/console` (см. также
+[раздел про откат](#откат-rollback)):
 
-```go
-package main
-
-import (
-	"log"
-
-	"github.com/exgamer/go-sdk-rest-template/internal/migrations"
-	"github.com/exgamer/gosdk-core/pkg/app"
-	postgres "github.com/exgamer/gosdk-postgres-core/pkg/app"
-)
-
-func main() {
-	a := app.NewApp()
-	kernel := (&postgres.PostgresKernel{}).WithMigrations(migrations.All()...)
-
-	if err := a.RegisterAndInitKernels(kernel); err != nil {
-		log.Fatal(err)
-	}
-
-	log.Println("migrations applied")
-}
+```bash
+go run ./cmd/console migrate up
 ```
+
+`cmd/console` — общая точка входа для ops-команд проекта, построена на
+[`gosdk-console-core`](https://github.com/exgamer/gosdk-console-core)
+(`ConsoleKernel` оборачивает [cobra](https://github.com/spf13/cobra) и
+встраивается в приложение как обычный kernel). `migrate` — одна группа
+команд внутри неё; `go run ./cmd/console --help` показывает все
+зарегистрированные группы.
 
 Запустить дважды подряд — второй раз ничего не должно примениться (только
 `SELECT count(*) FROM migrations WHERE id = ...`, без `CREATE`/`INSERT`).
