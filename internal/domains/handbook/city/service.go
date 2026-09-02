@@ -3,18 +3,21 @@ package city
 import (
 	"context"
 	"github.com/exgamer/gosdk-core/pkg/debug"
+	"github.com/exgamer/gosdk-core/pkg/errorreporter"
 	"github.com/exgamer/gosdk-db-core/pkg/query/pagination"
 )
 
-func NewService(repository Repository) *Service {
+func NewService(repository Repository, cacheRepository CacheRepository) *Service {
 	return &Service{
-		repository: repository,
+		repository:      repository,
+		cacheRepository: cacheRepository,
 	}
 }
 
 type Service struct {
-	repository     Repository
-	httpRepository HttpRepository
+	repository      Repository
+	httpRepository  HttpRepository
+	cacheRepository CacheRepository
 }
 
 func (s *Service) GetCity(ctx context.Context) (*City, error) {
@@ -37,14 +40,53 @@ func (s *Service) GetById(ctx context.Context, id uint) (*City, error) {
 		dbg.AddStep("asdfasdf")
 	}
 
-	return s.repository.GetById(ctx, id)
+	// Пример errorreporter.CaptureSoft: кеш недоступен (например Redis
+	// упал) - запрос не должен из-за этого падать, просто идём в БД.
+	// Но факт деградации (кеш не работает) должен долететь до Sentry.
+	if s.cacheRepository != nil {
+		cached, err := s.cacheRepository.GetCityById(ctx, id)
+		if err != nil {
+			errorreporter.CaptureSoft(ctx, err, map[string]string{
+				"component": "redis_cache",
+				"domain":    "city",
+			})
+		} else if cached != nil {
+			return cached, nil
+		}
+	}
+
+	model, err := s.repository.GetById(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+
+	if s.cacheRepository != nil && model != nil {
+		// Не смогли прогреть кеш - тоже не повод валить успешный ответ,
+		// просто репортим и едем дальше.
+		if err := s.cacheRepository.SetCity(ctx, model); err != nil {
+			errorreporter.CaptureSoft(ctx, err, map[string]string{
+				"component": "redis_cache",
+				"domain":    "city",
+			})
+		}
+	}
+
+	return model, nil
 }
 
 func (s *Service) Create(ctx context.Context, model *City) (*City, error) {
 	model, err := s.repository.Create(ctx, model)
 
 	if err != nil {
-		return nil, err
+		// Пример errorreporter.CaptureError: ошибку и пробрасываем
+		// наверх (как обычно), и одновременно репортим в Sentry - одной
+		// строкой. Дедуп внутри errorreporter защитит от повторной
+		// отправки, если этот же err ещё раз попадёт в Capture выше по
+		// стеку (например в HTTP-транспорте).
+		return nil, errorreporter.CaptureError(ctx, err, map[string]string{
+			"component": "city_service",
+			"operation": "create",
+		})
 	}
 
 	return model, nil

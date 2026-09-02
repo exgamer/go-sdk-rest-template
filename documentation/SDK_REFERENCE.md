@@ -420,6 +420,8 @@ SWAGGER_PREFIX=my-service
 HANDLER_TIMEOUT=30
 
 # Sentry
+# Требует зарегистрированного sentryapp.SentryKernel{} в списке кернелов
+# (internal/app/app.go) - без него события никуда не отправляются.
 SENTRY_DSN=
 
 # Postgres
