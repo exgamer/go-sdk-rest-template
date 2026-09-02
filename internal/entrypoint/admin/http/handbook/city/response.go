@@ -22,3 +22,8 @@ type paginatedItem struct {
 type paginatedResponse struct {
 	structures.Response[paginatedItem]
 }
+
+// pingResponse пример ответа без обёртки {success, data} — отдаётся через response.RawSuccess.
+type pingResponse struct {
+	Status string `json:"status"`
+}

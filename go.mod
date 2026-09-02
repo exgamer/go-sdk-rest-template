@@ -7,7 +7,7 @@ require (
 	github.com/exgamer/gosdk-console-core v0.0.1
 	github.com/exgamer/gosdk-core v1.0.23
 	github.com/exgamer/gosdk-db-core v1.0.18
-	github.com/exgamer/gosdk-http-core v1.0.29
+	github.com/exgamer/gosdk-http-core v1.0.30
 	github.com/exgamer/gosdk-http-request-builder v1.0.14
 	github.com/exgamer/gosdk-postgres-core v1.0.19
 	github.com/exgamer/gosdk-rabbit-core v1.0.6

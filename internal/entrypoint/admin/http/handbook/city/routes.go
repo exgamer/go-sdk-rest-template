@@ -33,6 +33,7 @@ func SetRoutes(
 			v1.PUT("/city/:id", handler.Update())
 			v1.DELETE("/city/:id", handler.Delete())
 			v1.GET("/city/by-http", handler.ViewByHttp())
+			v1.GET("/city/ping", handler.Ping())
 		}
 	}
 

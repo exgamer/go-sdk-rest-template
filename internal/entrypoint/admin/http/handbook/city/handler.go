@@ -225,3 +225,16 @@ func (h *Handler) ViewByHttp() gin.HandlerFunc {
 		response.Success(c, itemFromEntity(item))
 	}
 }
+
+//			@Summary		Пример эндпойнта без обёртки {success, data}
+//			@Description	Пример эндпойнта без обёртки {success, data}
+//			@Tags			city
+//			@Accept			json
+//			@Produce		json
+//		    @Success		200 {object} pingResponse
+//	     @Router			/rest-template/v1/city/ping [get]
+func (h *Handler) Ping() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		response.RawSuccess(c, pingResponse{Status: "ok"})
+	}
+}
