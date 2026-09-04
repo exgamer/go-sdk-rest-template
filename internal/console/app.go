@@ -11,6 +11,7 @@ import (
 	"github.com/exgamer/gosdk-core/pkg/config"
 	postgres "github.com/exgamer/gosdk-postgres-core/pkg/app"
 	database "github.com/exgamer/gosdk-postgres-core/pkg/helpers"
+	sentryapp "github.com/exgamer/gosdk-sentry-core/pkg/app"
 	"gorm.io/gorm"
 )
 
@@ -41,7 +42,7 @@ func NewApp() (*App, error) {
 		db:  db,
 	}
 
-	if err := appInstance.RegisterAndInitKernels(consoleKernel); err != nil {
+	if err := appInstance.RegisterAndInitKernels(&sentryapp.SentryKernel{}, consoleKernel); err != nil {
 		return nil, err
 	}
 

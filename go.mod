@@ -4,15 +4,15 @@ go 1.25.5
 
 require (
 	github.com/ThreeDotsLabs/watermill v1.5.2
-	github.com/exgamer/gosdk-console-core v0.0.1
-	github.com/exgamer/gosdk-core v1.0.24
+	github.com/exgamer/gosdk-console-core v1.0.1
+	github.com/exgamer/gosdk-core v1.0.25
 	github.com/exgamer/gosdk-db-core v1.0.18
-	github.com/exgamer/gosdk-http-core v1.0.31
+	github.com/exgamer/gosdk-http-core v1.0.32
 	github.com/exgamer/gosdk-http-request-builder v1.0.14
 	github.com/exgamer/gosdk-postgres-core v1.0.19
-	github.com/exgamer/gosdk-rabbit-core v1.0.7
+	github.com/exgamer/gosdk-rabbit-core v1.0.8
 	github.com/exgamer/gosdk-redis-core v1.0.9
-	github.com/exgamer/gosdk-sentry-core v1.0.0
+	github.com/exgamer/gosdk-sentry-core v1.0.1
 	github.com/gin-gonic/gin v1.12.0
 	github.com/redis/go-redis/v9 v9.22.0
 	github.com/spf13/cobra v1.10.2
@@ -32,7 +32,7 @@ require (
 	github.com/cloudwego/base64x v0.1.6 // indirect
 	github.com/fsnotify/fsnotify v1.10.1 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.13 // indirect
-	github.com/getsentry/sentry-go v0.48.0 // indirect
+	github.com/getsentry/sentry-go v0.49.0 // indirect
 	github.com/gin-contrib/sse v1.1.0 // indirect
 	github.com/go-errors/errors v1.5.1 // indirect
 	github.com/go-gormigrate/gormigrate/v2 v2.1.6 // indirect
