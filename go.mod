@@ -3,15 +3,15 @@ module github.com/exgamer/go-sdk-rest-template
 go 1.25.5
 
 require (
-	github.com/ThreeDotsLabs/watermill v1.5.2
+	github.com/ThreeDotsLabs/watermill v1.5.3
 	github.com/exgamer/gosdk-console-core v1.0.1
 	github.com/exgamer/gosdk-core v1.0.25
 	github.com/exgamer/gosdk-db-core v1.0.18
-	github.com/exgamer/gosdk-http-core v1.0.32
+	github.com/exgamer/gosdk-http-core v1.0.34
 	github.com/exgamer/gosdk-http-request-builder v1.0.14
 	github.com/exgamer/gosdk-postgres-core v1.0.19
-	github.com/exgamer/gosdk-rabbit-core v1.0.8
-	github.com/exgamer/gosdk-redis-core v1.0.9
+	github.com/exgamer/gosdk-rabbit-core v1.0.9
+	github.com/exgamer/gosdk-redis-core v1.0.11
 	github.com/exgamer/gosdk-sentry-core v1.0.1
 	github.com/gin-gonic/gin v1.12.0
 	github.com/redis/go-redis/v9 v9.22.0
