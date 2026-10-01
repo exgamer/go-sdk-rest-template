@@ -36,6 +36,7 @@ func (r *PostgresRepository) Paginated(ctx context.Context, searchDto *citydomai
 
 		return client.
 			WithContext(ctx).
+			Table(city{}.TableName()).
 			Select("*").
 			Where(strings.Join(query, " AND "), args...).
 			Order(orderBy)
@@ -53,10 +54,10 @@ func (r *PostgresRepository) GetById(ctx context.Context, id uint) (*citydomain.
 	ctx, cancel := context.WithTimeout(ctx, 10*time.Second)
 	defer cancel()
 
-	var entity citydomain.City
+	var model city
 	result := r.client.WithContext(ctx).
 		Where("id = ?", id).
-		First(&entity)
+		First(&model)
 
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 		return nil, nil
@@ -66,7 +67,7 @@ func (r *PostgresRepository) GetById(ctx context.Context, id uint) (*citydomain.
 		return nil, result.Error
 	}
 
-	return &entity, nil
+	return modelToEntity(&model), nil
 }
 
 func (r *PostgresRepository) Create(ctx context.Context, city *citydomain.City) (*citydomain.City, error) {
