@@ -4,15 +4,15 @@ go 1.26.0
 
 require (
 	github.com/ThreeDotsLabs/watermill v1.5.3
-	github.com/exgamer/gosdk-console-core v1.0.3
-	github.com/exgamer/gosdk-core v1.0.27
-	github.com/exgamer/gosdk-db-core v1.0.20
-	github.com/exgamer/gosdk-http-core v1.0.37
-	github.com/exgamer/gosdk-http-request-builder v1.0.14
-	github.com/exgamer/gosdk-postgres-core v1.0.22
-	github.com/exgamer/gosdk-rabbit-core v1.0.11
-	github.com/exgamer/gosdk-redis-core v1.0.13
-	github.com/exgamer/gosdk-sentry-core v1.0.3
+	github.com/exgamer/gosdk-console-core v1.0.4
+	github.com/exgamer/gosdk-core v1.0.28
+	github.com/exgamer/gosdk-db-core v1.0.21
+	github.com/exgamer/gosdk-http-core v1.0.38
+	github.com/exgamer/gosdk-http-request-builder v1.0.15
+	github.com/exgamer/gosdk-postgres-core v1.0.23
+	github.com/exgamer/gosdk-rabbit-core v1.0.12
+	github.com/exgamer/gosdk-redis-core v1.0.14
+	github.com/exgamer/gosdk-sentry-core v1.0.4
 	github.com/gin-gonic/gin v1.12.0
 	github.com/redis/go-redis/v9 v9.23.0
 	github.com/spf13/cobra v1.10.2
