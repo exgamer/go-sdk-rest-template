@@ -37,6 +37,8 @@ LOG_LEVEL=DEBUG
 SERVER_ADDRESS=0.0.0.0:8090
 SWAGGER_PREFIX=rest-template
 SWAGGER_ENABLED=true
+# Текст паники и стек в ответе 500 (с gosdk-http-core v1.2.0): true | 1 — включено; пусто или любое другое — выключено. На проде не задавать
+HTTP_ERROR_DETAILS=
 HANDLER_TIMEOUT=30
 
 POSTGRES_DB_HOST=localhost

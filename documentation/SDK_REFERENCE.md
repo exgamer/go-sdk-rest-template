@@ -418,6 +418,7 @@ LOG_LEVEL=DEBUG        # DEBUG | INFO | WARN | ERROR
 SERVER_ADDRESS=0.0.0.0:8090
 SWAGGER_PREFIX=my-service
 SWAGGER_ENABLED=true   # true | 1 — включён; не задана, false, 0 — выключен
+HTTP_ERROR_DETAILS=    # текст паники и стек в ответе 500 (с gosdk-http-core v1.2.0): true | 1 — включено; не задана, пусто, false, 0 и любое другое — выключено. На проде не задавать
 HANDLER_TIMEOUT=30
 
 # Sentry
