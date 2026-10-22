@@ -1,18 +1,18 @@
 module github.com/exgamer/go-sdk-rest-template
 
-go 1.26.0
+go 1.27.3
 
 require (
 	github.com/ThreeDotsLabs/watermill v1.5.3
-	github.com/exgamer/gosdk-console-core v1.0.4
-	github.com/exgamer/gosdk-core v1.0.28
-	github.com/exgamer/gosdk-db-core v1.0.21
-	github.com/exgamer/gosdk-http-core v1.0.38
-	github.com/exgamer/gosdk-http-request-builder v1.0.15
-	github.com/exgamer/gosdk-postgres-core v1.0.23
-	github.com/exgamer/gosdk-rabbit-core v1.0.12
-	github.com/exgamer/gosdk-redis-core v1.0.14
-	github.com/exgamer/gosdk-sentry-core v1.0.4
+	github.com/exgamer/gosdk-console-core v1.0.5
+	github.com/exgamer/gosdk-core v1.0.29
+	github.com/exgamer/gosdk-db-core v1.0.22
+	github.com/exgamer/gosdk-http-core v1.1.0
+	github.com/exgamer/gosdk-http-request-builder v1.0.16
+	github.com/exgamer/gosdk-postgres-core v1.0.24
+	github.com/exgamer/gosdk-rabbit-core v1.0.13
+	github.com/exgamer/gosdk-redis-core v1.0.15
+	github.com/exgamer/gosdk-sentry-core v1.0.5
 	github.com/gin-gonic/gin v1.12.0
 	github.com/redis/go-redis/v9 v9.23.0
 	github.com/spf13/cobra v1.10.2
@@ -97,7 +97,6 @@ require (
 	github.com/swaggo/gin-swagger v1.6.1 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.3.2 // indirect
-	github.com/vearne/gin-timeout v0.2.3 // indirect
 	github.com/zsais/go-gin-prometheus v1.0.3 // indirect
 	go.mongodb.org/mongo-driver/v2 v2.9.2 // indirect
 	go.uber.org/atomic v1.12.0 // indirect

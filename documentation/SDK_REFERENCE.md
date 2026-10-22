@@ -417,6 +417,7 @@ LOG_LEVEL=DEBUG        # DEBUG | INFO | WARN | ERROR
 # HTTP сервер
 SERVER_ADDRESS=0.0.0.0:8090
 SWAGGER_PREFIX=my-service
+SWAGGER_ENABLED=true   # true | 1 — включён; не задана, false, 0 — выключен
 HANDLER_TIMEOUT=30
 
 # Sentry

@@ -71,3 +71,6 @@ http://0.0.0.0:8090/{SWAGGER_PREFIX}/api-docs/doc.json
 ```
 
 Значение `SWAGGER_PREFIX` задаётся в `.env`.
+
+С `gosdk-http-core` v1.1.0 Swagger по умолчанию выключен. Включает `SWAGGER_ENABLED=true` (или `1`) в `.env`;
+не задана, `false`, `0` и любое другое значение — Swagger выключен, адреса выше отвечают 404.
